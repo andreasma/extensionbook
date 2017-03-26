@@ -237,11 +237,14 @@ Die Datei description.xml sieht nun wie folgt aus:
     <platform value="all" />
 
     <display-name>
-        <name lang="de">Meine erste LibreOffice Extension</name>
-        <name lang="en">My first LibreOffice extension</name>
+        <name lang="de">
+            Meine erste LibreOffice Extension</name>
+        <name lang="en">
+            My first LibreOffice extension</name>
     </display-name>
     <publisher>
-        <name xlink:href="http://amantke.de/blog">Andreas Mantke</name>
+        <name xlink:href="http://amantke.de/blog">
+            Andreas Mantke</name>
     </publisher>    
 </description>
 \end{lstlisting}
@@ -255,10 +258,11 @@ Eine LibreOffice Extension benötigt zumindest eine Datei manifest.xml, die weit
 \label{fig:error_deinstallation_missing_manifest}
 \end{center}
 
-Wir legen dazu ein Unterverzeichnis "META-INF" und in diesem eine neue Datei manifest.xml an. Die Datei bekommt zunächst nur folgenden Inhalt:
+Wir legen dazu ein Unterverzeichnis \glqq META-INF\grqq~und in diesem eine neue Datei manifest.xml an. Die Datei bekommt zunächst nur folgenden Inhalt:
 \begin{lstlisting}
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest:manifest xmlns:manifest="http://openoffice.org/2001/manifest">
+<manifest:manifest 
+    xmlns:manifest="http://openoffice.org/2001/manifest">
 </manifest:manifest>
 \end{lstlisting}
 
@@ -276,15 +280,17 @@ myfirstextension.oxt
 Das Build-Skript mit dem Namen build sieht folgendermaßen aus:
 \begin{lstlisting}
 #!/usr/bin/env python
-# This Source Code Form is subject to the terms of the Mozilla Public
-# License, v. 2.0. If a copy of the MPL was not distributed with this
-# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# This Source Code Form is subject to the terms of the 
+# Mozilla Public License, v. 2.0. If a copy of the MPL was  
+# not distributed with this file, You can obtain one at 
+# http://mozilla.org/MPL/2.0/.
 
 from zipfile import ZipFile
 import os, os.path, sys
 scriptdir = os.path.dirname(os.path.abspath(sys.argv[0]))
 extensionname = open(
-    os.path.join(scriptdir, 'extensionname.txt')).readlines()[0].rstrip('\n')
+    os.path.join(scriptdir, 
+        'extensionname.txt')).readlines()[0].rstrip('\n')
 with ZipFile(extensionname, 'w') as tuesdayzip:
     os.chdir(scriptdir)
     for root, dirs, files in os.walk('.'):
@@ -334,8 +340,12 @@ In dem Tag hinter \glqq xlink:href \grqq wird die relative URL zu der Grafikdate
 Es ist möglich, für die Extension eine minimale Version von LibreOffice anzugeben. Dies geschieht über den <dependencies>-Tag. Dieser Tag braucht eine Namespace-Deklaration, die hinter \glqq xmlns:lo \grqq erfolgt. Innerhalb der <dependencies>-Tag wird dann mit einem weiteren Tag die minimale LibreOffice-Version, für das Beispiel Version 4.2.
 
 \begin{lstlisting}
-<dependencies xmlns:lo="http://libreoffice.org/extensions/description/2011">
-    <lo:LibreOffice-minimal-version name="LibreOffice 4.2" value="4.2"/>
+<dependencies xmlns:lo=
+    "http://libreoffice.org/extensions/description/2011">
+    
+    <lo:LibreOffice-minimal-version name="LibreOffice 4.2" 
+        value="4.2"/>
+    
 </dependencies>
 \end{lstlisting}
 
@@ -348,8 +358,10 @@ Der Extension kann eine Erläuterung Ihrer Funktionsweise über den <extension-d
 Hierzu legen wir zunächst ein weiteres Unterverzeichnis \glqq description \grqq und darin zwei neue -zunächst leere Textdateien \verb|"description_de.txt"| und \verb|"description_en.txt"| an. Diese können später mit Informationen in deutscher und englischer Sprache befüllt werden. Wir binden diese beiden Beschreibungsdateien über folgende Ergänzung des <description>-Tag ein:
 \begin{lstlisting}
 <extension-description>
-    <src xlink:href="description/description_en.txt" lang="en" />
-    <src xlink:href="description/description_de.txt" lang="de" />
+    <src xlink:href="description/description_en.txt" 
+        lang="en" />
+    <src xlink:href="description/description_de.txt" 
+        lang="de" />
 </extension-descritption>
 \end{lstlisting}
 
@@ -387,12 +399,13 @@ Legen Sie nun ein weiteres Unterverzeichnis \glqq registration\grqq~ und darin d
 \begin{lstlisting}
 <registration>
     <simple-license accept-by="admin">
-        <license-text xlink:href="registration/license_de.txt" lang="de" />
-        <license-text xlink:href="registration/license_en.txt" lang="en" />
+        <license-text xlink:href="registration/license_de.txt" 
+            lang="de" />
+        <license-text xlink:href="registration/license_en.txt" 
+            lang="en" />
     </simple-license>
 </registration>
 \end{lstlisting}
-\pagebreak
 
 Die Datei description.xml hat mit den weiteren vorgenommenen Ergänzungen nun folgenden Inhalt:
 
@@ -406,30 +419,40 @@ Die Datei description.xml hat mit den weiteren vorgenommenen Ergänzungen nun fo
     <version value="0.1" />
     <platform value="all" />
     <display-name>
-        <name lang="de">Meine erste LibreOffice Extension</name>
-        <name lang="en">My first LibreOffice extension</name>
+        <name lang="de">
+            Meine erste LibreOffice Extension</name>
+        <name lang="en">
+            My first LibreOffice extension</name>
     </display-name>
     <publisher>
-        <name xlink:href="http://amantke.de/blog">Andreas Mantke</name>
+        <name xlink:href="http://amantke.de/blog">
+            Andreas Mantke</name>
     </publisher>
     <icon>
         <default xlink:href="images/extensionicon_42.png" />
     </icon>
-    <dependencies xmlns:lo="http://libreoffice.org/extensions/description/2011">
-        <lo:LibreOffice-minimal-version name="LibreOffice 4.2" value="4.2"/>
+    <dependencies xmlns:lo=
+        "http://libreoffice.org/extensions/description/2011">
+        <lo:LibreOffice-minimal-version name="LibreOffice 4.2" 
+            value="4.2"/>
     </dependencies>
     <extension-description>
-        <src xlink:href="description/description_en.txt" lang="en" />
-        <src xlink:href="description/description_de.txt" lang="de" />
+        <src xlink:href="description/description_en.txt" 
+            lang="en" />
+        <src xlink:href="description/description_de.txt" 
+            lang="de" />
     </extension-description>
     <registration>
         <simple-license accept-by="admin">
-            <license-text xlink:href="registration/license_de.txt" lang="de" />
-            <license-text xlink:href="registration/license_en.txt" lang="en" />
+            <license-text xlink:href="registration/license_de.txt" 
+                lang="de" />
+            <license-text xlink:href="registration/license_en.txt" 
+                lang="en" />
         </simple-license>
     </registration>
 </description>
 
 \end{lstlisting}
+
 \end{document}
 
