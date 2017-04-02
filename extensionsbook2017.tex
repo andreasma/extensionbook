@@ -61,7 +61,9 @@
 
 \chapter*{Vorwort}
 
-Für das Entwickeln von LibreOffice finden sich Informationen auf verschiedenen Ressourcen. Zum Teil muss ersatzweise auf - nicht immer noch aktuelle - Informationen zu OpenOffice.org zurückgegriffen werden. Das Ziel dieses Dokumentes ist es, möglichst detaillierte Informationen zur eigenständigen Entwicklung von neuen LibreOffice Extensions zu geben. Die Darstellung soll dabei anhand von Beispielen erfolgen. Das Dokument ist eine Arbeit im Fluss und wird nach und nach um weitere Kapitel ergänzt werden.
+Für das Entwickeln von LibreOffice finden sich Informationen auf verschiedenen Ressourcen. Zum Teil muss ersatzweise auf - nicht immer noch aktuelle - Informationen zu OpenOffice.org zurückgegriffen werden. Das Ziel dieses Dokumentes ist es, möglichst detaillierte Informationen zur eigenständigen Entwicklung von neuen LibreOffice Extensions zu geben. Die Darstellung soll dabei anhand von Beispielen erfolgen. Diese werden die unterschiedlichen Bereiche beleuchten, mit denen sich weitere oder besondere Inhalte oder neue bzw. erweiterte Funktionen zu LibreOffice hinzugefügt werden können. Es geht also sowohl um beispielsweise das Hinzufügen von eigenen Themen zur sogenannten Gallery wie auch um weitere Funktionalität unter Verwenden von Programmiersprachen, wie z.B. Python. Für die letztere Programmiersprache bringt LibreOffice bereits eine Umgebung von Python 3 mit.
+
+Das Dokument ist eine Arbeit im Fluss und wird nach und nach um weitere Kapitel ergänzt werden. Es ist aktuell nur in deutscher Sprache verfügbar. Eine Lokalisation in anderen Sprachen ist aber für die Zukunft eine Option.
 
 \chapter{Arten von Erweiterungen}
 Für LibreOffice können Sie Extensions (Erweiterungen) erstellen, die mit verschiedenen Programmiersprachen arbeiten. Es sind die folgenden Sprachen verfügbar:
@@ -456,9 +458,19 @@ Die Datei description.xml hat mit den weiteren vorgenommenen Ergänzungen nun fo
 
 \chapter{Auslieferung von Inhalten mit Extensions}
 
-MIt einer LibreOffice Extension lassen sich verschiedene Arten von Inhalten dem Standard-Programm hinzufügen. So ist es beispielsweise möglich, der Gallerie, einem Verwaltungsmodul für Grafiken, Zeichnungen, Musik und andere Multimediadateien, neue Bereiche und Dateien hinzuzufügen. Wie Sie eine solche Extension erstellen, soll im folgenden Abschnitt erläutert werden.
+MIt einer LibreOffice Extension lassen sich verschiedene Arten von Inhalten dem Standard-Programm hinzufügen. So ist es beispielsweise möglich, der Gallery, einem Verwaltungsmodul für Grafiken, Zeichnungen, Musik und andere Multimediadateien, neue Bereiche und Dateien hinzuzufügen. Wie Sie eine solche Extension erstellen, soll im folgenden Abschnitt erläutert werden.
 
-\section{Gallerie-Extension}
+\section{Gallery-Extension}
+
+Bevor wir eine Gallery-Extension erstellen können, müssen wir zunächst mit LibreOffice ein entsprechendes neues Gallery-Thema erstellen, das wir dann mit neuen Inhalten (z.B. Grafiken) befüllen und die entstandenen Dateien exportieren.
+
+\subsection{Neues Gallery-Thema erstellen}
+
+Beginnen wir also mit dem Erstellen eines neuen Gallery-Themas in LibreOffice. Starten Sie das Programm. Die Gallery rufen Sie über das Menü \glqq Ansicht\grqq~und den dortigen Eintrag \glqq Gallery\grqq~auf. Die Gallery wird damit in der Seitenleiste geöffnet (früher wurde sie oberhalb des Bearbeitungsfensters unterhalb der Menüleiste angezeigt). Im oberen Bereich werden die vorhandenen Themen in Ihrem LibreOffice angezeigt Erstellen Sie nun über die Schaltfläche \glqq Neues Thema\grqq~und den folgenden Dialog ein solches Thema. Auf dem ersten Register (\glqq Allgemein\grqq) des Dialogs geben Sie einen Namen für das Thema vor. Sofern Sie bereits zuvor Grafiken, Zeichnungen oder Multimedia-Dateien erstellt haben, können Sie diese über das Register \glqq Dateien\grqq~direkt dem Thema hinzufügen. Wir nennen das Thema \glqq Tiere\grqq~ nennen, da wir einige Grafiken mit offenen Lizenzen aus dem Openclipart-Projekt in unserer Beispiel-Extension in der LibreOffice-Gallery verfügbar machen wollen.
+
+Die Grafiken auf der Seite von OpenClipart (https://openclipart.org) werden dort unter Public Domain veröffentlicht. OpenClipart verwendet dazu die Creative Commons Zero 1.0 Public Domain License \linebreak(https://creativecommons.org/publicdomain/zero/1.0/).
+
+Für unser gerade erstelltes Tier-Thema  in der Gallery laden wir mehrere Tiergrafiken von der OpenClipart-Webseite möglichst im Vektorformat (SVG) herunter, z.B. einen Elefanten (Elephant), einen Tiger und einen Wolf.
 
 \chapter{Konfigurationseinstellungen mit einer Extension verteilen}
 
