@@ -495,6 +495,26 @@ Für unser gerade erstelltes Tier-Thema  in der Gallery laden wir mehrere Tiergr
 
 Zwar ist es möglich, SVG-Grafiken in die Gallery einzufügen, allerdings führt dies aktuell regelmäßig dazu, dass LibreOffice längere Zeit für das Hinzufügen benötigt, sehr viel Systemressourcen (CPU-Power) beansprucht und sich später auch beim Einfügen von Grafiken aus der Gallery in ein Dokument sehr viel Zeit nimmt bzw. scheitert. Die Grafiken sollten daher zunächst in ein Pixel-Dateiformat wie beispielsweise PNG umgewandelt werden. Dafür kann z.B. das Programm Inkscape (https://inkscape.org/de/) verwandt werden, sofern eine Umwandlung nicht auf der Kommandozeile erledigt werden soll.
 
+\begin{center}
+	\includegraphics[width=0.9\linewidth]{pics/libreoffice_gallery_new_theme_with_graphics}
+	\captionof{figure}{Das neue Gallery-Thema mit einigen Grafiken}
+	\label{fig:libreoffice_gallery_new_theme_with_graphics}
+\end{center}
+
+
+\bigskip\textbf{Exkurs}
+\\
+
+Auf der Kommandozeile lassen sich Grafiken mit dem Programm \glqq convert\grqq~aus dem Programmpaket ImageMagick konvertieren. Soll nur von einem Dateiformat in ein anderes konvertiert werden, reicht ein einfaches Kommando nach folgendem Muster:
+\begin{lstlisting}
+convert datei1.svg datei1.png
+\end{lstlisting}
+
+Die Datei \glqq datei1.svg\grqq~wird damit in die das Dateiformat PNG umgewandelt. Das Programm convert bietet darüber hinaus aber sehr viele Möglichkeiten, Grafiken schnell und komfortabel auf der Kommandozeile und viele Dateien in einem Durchgang zu bearbeiten.
+Ein Überblick zu den vielfältigen Optionen lässt sich auf der Seite https://www.imagemagick.org/script/convert.php gewinnen. Das Programmpaket ImageMagick ist sowohl für das Linux Betriebssystem und andere Betriebssysteme der Nix-Welt als auch für das Betriebssystem Windows verfügbar. Es kann von der Projektseite (https://www.imagemagick.org) heruntergeladen oder beispielsweise unter dem Betriebssystem Linux als Paket der jeweiligen Distribution installiert werden.
+
+
+
 \chapter{Konfigurationseinstellungen mit einer Extension verteilen}
 
 \end{document}
