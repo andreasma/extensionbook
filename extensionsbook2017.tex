@@ -92,7 +92,7 @@ Außerdem können Sie mit Extensions auch Konfigurationsdateien für LibreOffice
 
 Alle Erweiterungen von LibreOffice werden in einer komprimierten Container-Datei mit der Dateiendung .oxt gepackt. Sie können, sofern Sie unter einer freien Software-Lizenz stehen, über die Seite https://extensions.libreoffice.org veröffentlicht und geteilt bzw. zum Download angeboten werden.
 
-\chapter{Der Container OXT und sein Inhalt}
+\chapter{Der Container OXT und sein Inhalt}\label{oxtcontainerinhalt}
 Innerhalb des komprimierten Datei-Containers OXT befinden sich mehrere Dateien und es ist regelmäßig auch eine spezielle Struktur angelegt. Diese Struktur und der Inhalt der einzelnen Dateien des Containers sollen nun anhand eines konkreten Beispiels erläutert werden. Diese Beispielextension soll den Namen myfirstextension.oxt führen. Wir erstellen dazu zunächst ein Verzeichnis mit dem Namen myfirstextension. In diesem erzeugen wir dann die Textdatei description.xml, die wir im folgenden Abschnitt bearbeiten.
 \section{Die Datei description.xml}
 Wir öffnen nun die zuvor erstellte Datei description.xml mit einem Texteditor. Diese Datei wird die wesentlichen Verwaltungsinformationen der Extension enthalten.
@@ -513,7 +513,63 @@ convert datei1.svg datei1.png
 Die Datei \glqq datei1.svg\grqq~wird damit in die das Dateiformat PNG umgewandelt. Das Programm convert bietet darüber hinaus aber sehr viele Möglichkeiten, Grafiken schnell und komfortabel auf der Kommandozeile und viele Dateien in einem Durchgang zu bearbeiten.
 Ein Überblick zu den vielfältigen Optionen lässt sich auf der Seite https://www.imagemagick.org/script/convert.php gewinnen. Das Programmpaket ImageMagick ist sowohl für das Linux Betriebssystem und andere Betriebssysteme der Nix-Welt als auch für das Betriebssystem Windows verfügbar. Es kann von der Projektseite (https://www.imagemagick.org) heruntergeladen oder beispielsweise unter dem Betriebssystem Linux als Paket der jeweiligen Distribution installiert werden.
 
+\subsection{Die Dateien des neuen Gallery-Themas}
 
+Das neue Gallery-Thema ist nun erstellt und einige Dateien eingefügt worden. Es wurde von LibreOffice unter den Konfigurationsdateien des Benutzers abgelegt. Der genaue Speicherort und der Dateiname wird angezeigt, wenn im Kontextmenü des neuen Gallery-Themas der Befehl \glqq Eigenschaften\grqq~aufgerufen wird. Auf dem Register \glqq Allgemein\grqq~wird hinter \glqq Ort\grqq~der Pfad und Name des neuen Themas angezeigt. Ein Gallery-Thema besteht immer aus drei Dateien mit den Dateiendungen \glqq sdg\grqq, \glqq sdv\grqq~und \glqq thm\grqq. LibreOffice vergibt für ein neues Thema aktuell immer Dateinamen mit der Zeichenkette \glqq neues thema\grqq. Die Dateinamen lassen sich ändern. Es ist allerdings darauf zu achten, dass alle drei zusammengehörenden Dateien eines neuen Themas den gleichen Dateinamen vor der Dateiextension erhalten. Wir benennen die Dateien des neuen Themas also um in \glqq tiere.sdg\grqq, \glqq tiere.sdv\grqq~und \glqq tiere.thm\grqq. Damit haben wir die Gallery-Dateien für die neue Beispiel-Gallery-Extension fertig gestellt und können damit die Extension erstellen.
+
+\subsection{Bauen der Gallery-Extension}
+
+Im Kapitel \nameref{oxtcontainerinhalt} haben wir ein erste LibreOffice Extension in Ihrer Grundstruktur erstellt. Diese Extension soll nun um die weitere Funktionalität einer Gallery-Extension erweitert werden. Dazu legen wir im Grundverzeichnis einen weiteren Ordner \glqq gallery\grqq~ an und kopieren in diesen die vorhergehenden Abschnitt erstellten drei Gallery-Dateien. Im Grundverzeichnis erstellen wir weiterhin eine neue Textdatei \glqq paths.xcu\grqq.
+
+\bigskip\textbf{Die Datei paths.xcu}
+\\
+
+Die Datei paths.xcu beginnt mit einer XML-Definition, gefolgt von einer XML-Struktur:
+
+\begin{lstlisting}
+<?xml version="1.0" encoding="UTF-8"?>
+
+<oor:component-data oor:name="Paths" 
+    oor:package="org.openoffice.Office" 
+    xmlns:install="http://openoffice.org/2004/installation" 
+    xmlns:oor="http://openoffice.org/2001/registry"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    
+    <node oor:name="Paths">
+        <node oor:name="Gallery" oor:op="fuse">
+    	    <node oor:name="InternalPaths">
+    	        <node oor:name="%origin%/gallery" 
+    	            oor:op="fuse"/>
+    	    </node>
+    	</node>
+    </node>
+    
+</oor:component-data>
+\end{lstlisting}
+
+Zunächst wird ein XML-Element für eine Extension definiert, die keinen Programmcode enthält. Darauf folgt der Pfad, in dem der Inhalt abgelegt werden soll. Mit dem Schlüsselwort \glqq InternalPaths\grqq~werden alle Verzeichnisse gekennzeichnet, die etwas enthalten können, die der Benutzer nicht ändern, aber beispielsweise durch Extension-Pakete erweitern, also mit eigenen Inhalten bevölkern kann. Hier ist es die LibreOffice Gallery.
+
+Wenn Sie die Datei paths.xcu mit dem zuvor dargestellten Inhalt erstellt haben, wird diese allerdings noch nicht in der Extension aktiv eingebunden. Dafür ist eine kleine Ergänzung in der in Kapitel \ref{oxtcontainerinhalt} erstellten Datei \glqq manifest.xml\grqq~um folgende Zeile erforderlich:
+\begin{lstlisting}
+<manifest:file-entry manifest:media-type=
+"application/vnd.sun.star.configuration-data"  
+manifest:full-path ="paths.xcu"/>
+\end{lstlisting}  
+Diese Zeile ist zwischen:
+\begin{lstlisting}
+<manifest:manifest 
+    xmlns:manifest="http://openoffice.org/2001/manifest">
+\end{lstlisting}
+
+und
+
+\begin{lstlisting}
+</manifest:manifest>
+\end{lstlisting}
+einzufügen. Anschließend kann die LibreOffice Extension mit dem in Kapitel \ref{oxtcontainerinhalt} erstellten Buildskript gebündelt werden. Nach einer Installation der Extension mit dem LibreOffice Extension Manager sollte danach in der Gallery ein neues Thema \glqq Tiere\grqq~mit den entsprechenden Grafiken angezeigt werden.
+
+Während der Installation werden Sie feststellen, dass Sie lediglich eine weiße Seite im Dialog \glqq Lizenzvertrag für die Extension-Software\grqq~angezeigt bekommen. Dies beruht darauf, dass die im Kapitel \ref{oxtcontainerinhalt} erstellten Dateien für die Lizenzinformationen noch ohne Inhalt sind. Bevor Sie eine Extension veröffentlichen müssen Sie diese Dateien bearbeiten und dort die erforderlichen Informationen ablegen.
 
 \chapter{Konfigurationseinstellungen mit einer Extension verteilen}
 
