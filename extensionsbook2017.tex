@@ -548,7 +548,7 @@ Die Datei paths.xcu beginnt mit einer XML-Definition, gefolgt von einer XML-Stru
 </oor:component-data>
 \end{lstlisting}
 
-Zunächst wird ein XML-Element für eine Extension definiert, die keinen Programmcode enthält. Darauf folgt der Pfad, in dem der Inhalt abgelegt werden soll. Mit dem Schlüsselwort \glqq InternalPaths\grqq~werden alle Verzeichnisse gekennzeichnet, die etwas enthalten können, die der Benutzer nicht ändern, aber beispielsweise durch Extension-Pakete erweitern, also mit eigenen Inhalten bevölkern kann. Hier ist es die LibreOffice Gallery.
+Zunächst wird ein XML-Element für eine Extension definiert, die keinen Programmcode enthält. Darauf folgt der Pfad, in dem der Inhalt abgelegt werden soll. Mit dem Schlüsselwort \glqq InternalPaths\grqq~werden alle Verzeichnisse gekennzeichnet, die etwas enthalten können, die der Benutzer nicht ändern, aber beispielsweise durch Extension-Pakete erweitern, also mit eigenen Inhalten bevölkern kann. Hier ist es die LibreOffice Gallery. Das Schlüsselwort \glqq fuse\grqq~bewirkt das Vereinigen von bisherigem Inhalt der Gallery mit neuem Inhalt. Sofern bereits ein Verzeichnis mit dem entsprechenden Namen vorhanden ist, wird der Inhalt der Extension hinzugefügt, andernfalls wird ein neues Verzeichnis mit dem entsprechenden Namen angelegt.
 
 Wenn Sie die Datei paths.xcu mit dem zuvor dargestellten Inhalt erstellt haben, wird diese allerdings noch nicht in der Extension aktiv eingebunden. Dafür ist eine kleine Ergänzung in der in Kapitel \ref{oxtcontainerinhalt} erstellten Datei \glqq manifest.xml\grqq~um folgende Zeile erforderlich:
 \begin{lstlisting}
@@ -570,6 +570,35 @@ und
 einzufügen. Anschließend kann die LibreOffice Extension mit dem in Kapitel \ref{oxtcontainerinhalt} erstellten Buildskript gebündelt werden. Nach einer Installation der Extension mit dem LibreOffice Extension Manager sollte danach in der Gallery ein neues Thema \glqq Tiere\grqq~mit den entsprechenden Grafiken angezeigt werden.
 
 Während der Installation werden Sie feststellen, dass Sie lediglich eine weiße Seite im Dialog \glqq Lizenzvertrag für die Extension-Software\grqq~angezeigt bekommen. Dies beruht darauf, dass die im Kapitel \ref{oxtcontainerinhalt} erstellten Dateien für die Lizenzinformationen noch ohne Inhalt sind. Bevor Sie eine Extension veröffentlichen müssen Sie diese Dateien bearbeiten und dort die erforderlichen Informationen ablegen.
+
+\section{Template-Extension}
+
+Mit einer LibreOffice Extension lassen sich den Anwendern auch Vorlagen (Templates) für ihre täglichen Arbeiten oder bestimmte Aufgaben zur Verfügung stellen. Die Vorlagen werden dann, sofern sie für einzelne Benutzer installiert werden, in seinem Benutzerprofil abgelegt. Wo sich diese Einstellungen und insbesondere die Vorlagen befinden (oder später befinden werden, sofern bisher noch keine vorhanden sind), erfahren Sie bei einem Aufruf von \glqq Optionen\grqq~im Menü \glqq Extras\grqq. Dort befindet sich unter \glqq LibreOffice\grqq~der Eintrag \glqq Pfade\grqq. Wenn Sie diesen auswählen, sehen Sie auf der rechten Seite im Dialog die einzelnen Pfade (Paths), so auch den für die Vorlagen (\glqq Dokumentvorlagen\grqq).
+
+Gegenüber der Gallery-Extension aus dem vorhergehenden Abschnitt ändern sich für  eine LibreOffice Extension mit Dokumentvorlagen nur das Verzeichnis, in dem die Vorlagen abgelegt werden, und wenige Einträge in der Datei \glqq paths.xcu\grqq. Sofern der Eintrag zu den Pfaden für die Vorlagen in der Benutzerkonfiguration auf ein Verzeichnis \glqq templates\grqq~zeigt, ist lediglich das Wort \glqq gallery\grqq~durch das Wort \glqq template\grqq~zu ersetzen. Die Datei paths.xcu sieht dann wie folgt aus:
+
+\begin{lstlisting}
+<?xml version="1.0" encoding="UTF-8"?>
+
+<oor:component-data oor:name="Paths" 
+    oor:package="org.openoffice.Office" 
+    xmlns:install="http://openoffice.org/2004/installation" 
+    xmlns:oor="http://openoffice.org/2001/registry"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <node oor:name="Paths">
+        <node oor:name="Template" oor:op="fuse">
+            <node oor:name="InternalPaths">
+                <node oor:name="%origin%/template" 
+                    oor:op="fuse"/>
+                </node>
+            </node>
+        </node>
+
+</oor:component-data>
+\end{lstlisting}
+Nun fehlt noch das Verzeichnis mit den Dokumentenvorlagen. Dazu legen wir ein solches mit dem Namen \glqq template\grqq~im Grundverzeichnis an.
 
 \chapter{Konfigurationseinstellungen mit einer Extension verteilen}
 
