@@ -598,7 +598,30 @@ Gegenüber der Gallery-Extension aus dem vorhergehenden Abschnitt ändern sich f
 
 </oor:component-data>
 \end{lstlisting}
-Nun fehlt noch das Verzeichnis mit den Dokumentenvorlagen. Dazu legen wir ein solches mit dem Namen \glqq template\grqq~im Grundverzeichnis an.
+Nun fehlt noch das Verzeichnis mit den Dokumentenvorlagen. Dazu legen wir ein solches mit dem Namen \glqq template\grqq~im Grundverzeichnis an. Je nachdem welche Arten von Vorlagen mit der Extension zur Verfügung gestellt werden sollen, ist im Unterverzeichnis template sinnvoller Weise eine weitere Struktur mit eigenen Unterverzeichnissen anzulegen. Diese in der Dateihierarchie tieferen Unterverzeichnisse enthalten dann Dokumentenvorlagen zu einzelnen Themengebieten, beispielsweise Vorlagen für das Schreibprogramm Writer oder Präsentationsvorlagen.
+
+Es gibt bereits einige von LibreOffice für die von ihm mitgelieferten Dokumentenvorlagen verwendete Unterverzeichnisnamen, die bei der Benennung der Unterverzeichnisse im Verzeichnis template der Extension berücksichtigt werden sollten. Sie können sich diese Struktur im Programmverzeichnis von LibreOffice im Unterverzeichnis /share/template/common ansehen. Einige Beispiele:
+\begin{itemize}
+	\item officore = Geschäftliche Korrespondenz
+	\item offimisc = Sonstige geschäftliche Dokumente
+	\item personal = Private Korrespondenz und Dokumente
+	\item presnt = Präsentationsvorlagen
+	\item layout = Präsentationshintergründe
+	\item misc = Diverses
+\end{itemize}
+
+Um die Beispiel-Extension für Dokumentenvorlagen mit entsprechenden Dokumenten zu bevölkern, laden Sie von der LibreOffice Template-Seite htts://extensions.libreoffice.org/templates Vorlagendokumente aus verschiedenen Themenbereichen herunter, beispielsweise eine oder mehrere Briefvorlagen, Präsentationsvorlagen und Vorlagen für Lebensläufe.
+
+Sie können auch weitere Unterverzeichnisse für themenspezifische Vorlagen anlegen, beispielsweise \glqq education\grqq~für Bildung oder \glqq magazine\grqq~für Zeitschriften- bzw. Magazin-Vorlagen. Entsprechende Vorlagendokumente finden Sie auf der LibreOffice Template Webseite.
+
+Sofern Sie Ihre Beispiel-Vorlagen-Extension mit solchen weiteren Unterverzeichnissen mit entsprechenden Dokumentvorlagen ausgestattet haben, können Sie diese Themenbereiche in der Vorlagenverwaltung von LibreOffice gefiltert anzeigen lassen. Diesen Dialog rufen Sie über das Menü \glqq Datei - Vorlagen - Vorlagen verwalten\grqq~auf. Im Dialog können Sie dann filtern nach der Art der Dokumente, z.B. Textdokument, und nach Kategorien, z.B. Education. Sofern entsprechende Vorlagen vorhanden sind, werden Sie unten im Dialog angezeigt.
+
+\begin{center}
+	\includegraphics[width=0.9\linewidth]{pics/template_administration_dialog_with_new_template_section}
+	\captionof{figure}{Der Dialog Vorlagen verwalten mit neuer Kategorie education}
+	\label{fig:template_administration_dialog_with_new_template_section}
+\end{center}
+
 
 \chapter{Konfigurationseinstellungen mit einer Extension verteilen}
 
