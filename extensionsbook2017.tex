@@ -42,6 +42,12 @@
 \newcommand{\symbolleiste}{\textbf}
 \newcommand{\register}{textbf}
 
+\lstset{literate={ä}{{\"a}}1	
+	}
+\lstset{literate={ö}{{\"o}}1	
+}
+\lstset{literate={ü}{{\"u}}1	
+}
 
 \author{Andreas Mantke}
 \title{Erweiterungen für LibreOffice erstellen}
@@ -623,7 +629,23 @@ Sofern Sie Ihre Beispiel-Vorlagen-Extension mit solchen weiteren Unterverzeichni
 \end{center}
 
 
+
+Die Benennung der Kategorie mit \glqq education\grqq~im Filter der Vorlagenverwaltung lässt sich wie auch die Benennung anderer Kategorien sprachlich anpassen. Dazu legen Sie im Verzeichnis \glqq template\grqq~der Extension eine neue Datei \glqq groupuinames.xml\grqq~an. Mit dieser werden dann für die einzelnen Kategorien die Namen gesetzt. Die Datei kann dann beispielsweise folgenden Inhalt bekommen:
+
+\begin{lstlisting}[language={[LaTeX]TeX},inputencoding={utf8},extendedchars=false]
+<?xml version="1.0" encoding="UTF-8"?>
+<groupuinames:template-group-list
+    xmlns:groupuinames="http://openoffice.org/2006/groupuinames">
+    <groupuinames:template-group groupuinames:name="education"
+        groupuinames:default-ui-name="Bildung" />
+    <groupuinames:template-group groupuinames:name="presnt"
+        groupuinames:default-ui-name="Präsentationen" />
+</groupuinames:template-group-list>
+
+\end{lstlisting}
+
+Es ist nicht nötig, Verzeichnisnamen für Verzeichnisse aus der Standardinstallation von LibreOffice in der neuen XML-Datei erneut vorzugeben. Der zweite goupuinames-Eintrag war daher nicht erforderlich. Es wäre aber möglich gewesen, den mit der Extension neu im Unterverzeichnis \glqq presnt\grqq~verfügbar gemachten Präsentationsvorlagen einen abweichenden Kategorienamen zuzuordnen, beispielsweise \glqq Community-Präsentationen\grqq. Die von LibreOffice mitgelieferten Präsentationsvorlagen würden dann weiterhin mit der Kategorie \glqq Präsentationen\grqq~angezeigt, während die neuen der Extension unter \glqq Community-Präsentationen\grqq~eingeordnet wären.
+
 \chapter{Konfigurationseinstellungen mit einer Extension verteilen}
 
 \end{document}
-
