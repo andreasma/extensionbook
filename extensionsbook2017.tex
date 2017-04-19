@@ -646,6 +646,24 @@ Die Benennung der Kategorie mit \glqq education\grqq~im Filter der Vorlagenverwa
 
 Es ist nicht nötig, Verzeichnisnamen für Verzeichnisse aus der Standardinstallation von LibreOffice in der neuen XML-Datei erneut vorzugeben. Der zweite goupuinames-Eintrag war daher nicht erforderlich. Es wäre aber möglich gewesen, den mit der Extension neu im Unterverzeichnis \glqq presnt\grqq~verfügbar gemachten Präsentationsvorlagen einen abweichenden Kategorienamen zuzuordnen, beispielsweise \glqq Community-Präsentationen\grqq. Die von LibreOffice mitgelieferten Präsentationsvorlagen würden dann weiterhin mit der Kategorie \glqq Präsentationen\grqq~angezeigt, während die neuen der Extension unter \glqq Community-Präsentationen\grqq~eingeordnet wären.
 
+Eventuell wollen Sie eine Extension mit Vorlagen für unterschiedliche Sprachen bauen, wobei dem Anwender nur die Vorlagen aufgelistet werden, die zu seiner Spracheinstellung passen. Dies ist mit den Einstellungen für eine Multilanguage-Template- bzw. Mehrsprachen-Vorlagen-Extension möglich. Zunächst werden im Unterverzeichnis \glqq template\grqq~für die vorgesehenen Lokalisierungen neue Unterverzeichnisse angelegt. Die Benennung hat dabei der ISO-Sprachkodierung zu folgen, also  beispielsweise \glqq en-US\grqq~für englischsprachige, \glqq de\grqq~für deutschsprachige und \glqq fr\grqq~für französischsprachige Vorlagen. In diesen Unterverzeichnissen für die einzelnen Lokalen, werden dann jeweils wieder Unterverzeichnisse für die einzelnen Kategorien angelegt. Um deren Darstellung bzw. Benennung im Kategorien-Filter des Vorlagenverwaltungs-Dialogs zu steuern, werden in den Unterverzeichnissen der Lokalen jeweils wieder \glqq groupuinames.xml\grqq~Dateien nach dem zuvor dargestellten Muster angelegt.
+
+Danach bedarf es noch einer kleinen Änderung in der Datei \glqq paths.xcu\grqq. Dort ist die Zeile:
+\begin{lstlisting}
+<node oor:name="%origin%/template" oor:op="fuse"/>
+\end{lstlisting}
+
+durch die Zeile:
+\begin{lstlisting}
+<node oor:name="%origin%/template/$(vlang)" oor:op="fuse"/>
+\end{lstlisting}
+
+zu ersetzen. Die Ergänzung \glqq \$(vlang)\grqq~bewirkt, dass nur auf die Vorlagen der Extension in dem zur Spracheinstellung der Programmoberfläche passenden Unterverzeichnis zugegriffen und diese dem Anwender präsentiert werden. Die Vorlagen aus den Unterverzeichnissen mit anderen Sprachkodierungen werden ausgeblendet.
+
+Es ist nicht möglich in der Extension zusätzlich noch einen Bereich mit sprachunabhängigen Vorlagen anzulegen. Sofern solche Vorlagen - beispielsweise Präsentationshintergründe - allen Benutzern, unabhängig von der Oberflächen-Spracheinstellung verfügbar sein sollen, ist ihre Ablage folglich in dem entsprechenden Unterverzeichnis jeder Lokale vorzunehmen.
+
+\section{AutoText-Extension}
+
 \chapter{Konfigurationseinstellungen mit einer Extension verteilen}
 
 \end{document}
