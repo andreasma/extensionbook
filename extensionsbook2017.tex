@@ -691,6 +691,46 @@ Nachdem Sie nun ermittelt bzw. angezeigt haben, welche Textbausteine bereits in 
 
 Schließen Sie den AutoText-Dialog wieder und schreiben Sie Ihren ersten Textbaustein in das geöffnete Textdokument. Diesen Text markieren Sie danach und rufen wieder den AutoText-Dialog auf. Geben Sie im Feld Name nun die gewünschte Bezeichnung für Ihren Textbaustein und rechts ein Kürzel ein. Danach ordnen Sie den neuen Textbaustein noch einer Kategorie zu. Dazu wählen Sie die von Ihnen zuvor erstellte Kategorie im Feld unten aus. Danach klicken Sie auf die Schaltfläche \glqq AutoText\grqq~und wählen im Ausklappmenü \glqq Neu\grqq~aus. Damit haben Sie Ihren Textbaustein der Kategorie hinzugefügt. Nach Schließen des AutoText-Dialogs verfahren Sie entsprechend mit weiteren Textbausteinen, die Sie für die neue Extension verfassen wollen. Die AutoTexte sind dann jeweils unter Eingabe des vorgegebenen Kürzels und die Taste \glqq F3\grqq~einzufügen.
 
+Nachdem Sie nun die Bau-Dateien mit den Textbausteinen fertig gestellt haben, müssen diese nur noch in eine LibreOffice extension eingebaut werden. Sie erstellen dazu zunächst ein Unterverzeichnis \glqq autotext\grqq~im Grundverzeichnis der Extension. Danach erstellen Sie eine neue oder bearbeiten Sie die Datei \glqq paths.xcu\grqq, die sich ebenfalls im Extension-Grundverzeichnis befinden muss. Die Datei sollte danach folgenden Inhalt haben:
+
+
+\begin{lstlisting}
+<?xml version="1.0" encoding="UTF-8"?>
+
+<oor:component-data oor:name="Paths" 
+    oor:package="org.openoffice.Office" 
+    xmlns:install="http://openoffice.org/2004/installation" 
+    xmlns:oor="http://openoffice.org/2001/registry"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <node oor:name="Paths">
+        <node oor:name="AutoText" oor:op="fuse">
+            <node oor:name="InternalPaths">
+                <node oor:name="%origin%/autotext" 
+                    oor:op="fuse"/>
+            </node>
+        </node>
+    </node>
+</oor:component-data>
+\end{lstlisting}
+
+Gegenüber der im vorhergehenden Abschnitt erläuterten Vorlagen-Extension ändern sich in der Autotext-Extension das Schlüsselwort Name. Dieses lautet nunmehr \glqq AutoText\grqq. Außerdem ändert sich natürlich auch der Pfad zu dem Verzeichnis, in dem die Textbaustein-Zip-Dateien liegen. Dieser verweist auf das Unterverzeichnis \glqq autotext\grqq. In letzteres Unterverzeichnis kopieren Sie nun die von Ihnen erstellten Textbaustein-Zip-Dateien. Danach bauen Sie die Extension mit dem Python-Build-Skript. Entfernen Sie aus dem Autotext-Verzeichnis ihrer Benutzerkonfiguraion die erstellten Textbaustein-Zip-Archive und kontrollieren Sie, dass Ihre Textbausteine sich nicht mehr in der Liste der Autotexte befinden. Im Anschluss installieren sie mit dem Extension-Manager ihre AutoText-Extension. Sie sollten nun wieder ihre Textbausteine in der Liste der Autotexte angeboten bekommen.
+
+Die Textbausteine werden regelmäßig nur für eine Spracheinstellung von LibreOffice sinnvoll verwendbar sein, so dass die Autotexte nach Lokalisierungen gruppiert im Unterverzeichnis \glqq autotext\grqq~abgelegt werden sollten. Dazu erstellen Sie für jede Lokalisierung, für die Sie eine Textbaustein-Zip-Datei generiert haben, ein Unterverzeichnis, dessen Benennung der ISO-Sprachkodierung folgt, also  beispielsweise \glqq en-US\grqq~für englischsprachige, \glqq de\grqq~für deutschsprachige und \glqq fr\grqq~für französischsprachige Vorlagen. Die angelegten Unterverzeichnisse dürfen später nicht leer sein, d.h., sie müssen jeweils zumindest eine Textbaustein-Zip-Datei enthalten. Andernfalls wird nach der Installation der Extension bei einem Zugriff auf das Verzeichnis im Rahmen des Aufrufs der AutoText-Funktion eine Fehlermeldung angezeigt.
+
+Sofern Sie die Textbausteine nach Lokalisierungen gruppiert in Unterverzeichnissen ablegen, müssen Sie die Datei \glqq paths.xcu\grqq~anpassen. Dort ist die Zeile:
+\begin{lstlisting}
+<node oor:name="%origin%/autotext" oor:op="fuse"/>
+\end{lstlisting}
+
+durch die Zeile:
+\begin{lstlisting}
+<node oor:name="%origin%/autotext/$(vlang)" oor:op="fuse"/>
+\end{lstlisting}
+
+zu ersetzen. 
+
 \section{Farbpaletten-Extension}
 
 \chapter{Konfigurationseinstellungen mit einer Extension verteilen}
