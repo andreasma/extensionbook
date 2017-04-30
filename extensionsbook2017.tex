@@ -729,9 +729,42 @@ durch die Zeile:
 <node oor:name="%origin%/autotext/$(vlang)" oor:op="fuse"/>
 \end{lstlisting}
 
-zu ersetzen. 
+zu ersetzen.
 
 \section{Farbpaletten-Extension}
+
+LibreOffice bringt eine Reihe von Farb-Paletten mit. Sie können sich die verfügbaren Paletten beispielsweise in dem Dialog \glqq Fläche\grqq~anzeigen lassen, den Sie im Programmmodul Draw im Menü \glqq Format\grqq~aufrufen können.
+
+\begin{center}
+	\includegraphics[width=0.9\linewidth]{pics/dialog_flaeche}
+	\captionof{figure}{Der Dialog Fläche}
+	\label{fig:dialog_flaeche}
+\end{center}
+
+Sie können nun eigene Farb-Paletten beispielsweise für spezielle Anwendungsfälle, etwa für die Corporate Identity eines Unternehmens, erstellen und anschließend mittels einer LibreOffice-Extension verteilen.
+
+Zunächst erstellen Sie im Grundverzeichnis der Farbpaletten-Extension ein neues Unterverzeichnis \glqq palette\grqq. In diesem Unterverzeichnis erstellen Sie eine neue Datei mit dem Namen der Palette und der Dateiendung \glqq soc\grqq, zum Beispiel \glqq meinefirma.soc\grqq. Rufen Sie die neue Datei in einem Texteditor auf und fügen Sie Folgendes dort ein:
+
+\begin{lstlisting}
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- https://meinefirma.de -->
+<ooo:color-table xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
+    xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:ooo="http://openoffice.org/2004/office">
+    
+</ooo:color-table>
+\end{lstlisting}
+
+Innerhalb des XML-Tag <ooo:color-table> legen Sie danach die einzelnen Farben nach folgendem Muster and:
+
+\begin{lstlisting}
+<draw:color draw:name="Farbname" 
+    draw:color="#Farbkodierung in Hexadezimal" />
+\end{lstlisting}
+
+Anstelle von Farbname tragen Sie dabei den individuellen Namen ihre benutzerdefinierten Farbe ein. Hinter \glqq draw color\grqq~ folgt nach dem \glqq \#\grqq~die Farbe in hexadezimaler Kodierung. Sofern Sie nur die Werte ihrer Farben nur im System RGB vorliegen haben, können Sie den Dialog \glqq Fläche\grqq~zum Umrechnen in das Hexadezimal-System verwenden. Geben Sie dazu auf der rechten Seite einfach die RGB-Werte ein und lesen Sie den Wert im Feld \glqq Hex\grqq~ab.
 
 \chapter{Konfigurationseinstellungen mit einer Extension verteilen}
 
