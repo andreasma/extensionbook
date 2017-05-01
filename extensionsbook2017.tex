@@ -766,6 +766,34 @@ Innerhalb des XML-Tag <ooo:color-table> legen Sie danach die einzelnen Farben na
 
 Anstelle von Farbname tragen Sie dabei den individuellen Namen ihre benutzerdefinierten Farbe ein. Hinter \glqq draw color\grqq~ folgt nach dem \glqq \#\grqq~die Farbe in hexadezimaler Kodierung. Sofern Sie nur die Werte ihrer Farben nur im System RGB vorliegen haben, können Sie den Dialog \glqq Fläche\grqq~zum Umrechnen in das Hexadezimal-System verwenden. Geben Sie dazu auf der rechten Seite einfach die RGB-Werte ein und lesen Sie den Wert im Feld \glqq Hex\grqq~ab.
 
+Wenn Sie die Datei mit der Farbpalette fertig gestellt haben, müssen Sie noch die Datei \glqq paths.xcu\grqq~im Grundverzeichnis neu anlegen oder ändern mit folgendem Inhalt:
+
+
+\begin{lstlisting}
+<?xml version="1.0" encoding="UTF-8"?>
+
+<oor:component-data oor:name="Paths" 
+    oor:package="org.openoffice.Office" 
+    xmlns:install="http://openoffice.org/2004/installation" 
+    xmlns:oor="http://openoffice.org/2001/registry"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <node oor:name="Paths">
+        <node oor:name="Palette" oor:op="fuse">
+            <node oor:name="InternalPaths">
+                <node oor:name="%origin%/palette" 
+                    oor:op="fuse"/>
+            </node>
+        </node>
+    </node>
+</oor:component-data>
+\end{lstlisting}
+
+Der Unterschied gegenüber den zuvor beschriebenen LibreOffice-Extensions besteht in der Bezeichnung hinter \glqq oor:name\grqq~, der nun \glqq Palette\grqq~lautet, sowie dem Pfad in dem weiteren Knoten, der nun auf das Unterverzeichnis \glqq palette\grqq~verweist.
+
+Mit der nun fertig gestellten Datei \glqq paths.xcu\grqq~können Sie die Extension wieder mit dem in der Vorlage enthaltenen Skript \glqq build\grqq~automatisch bauen lassen.
+
 \chapter{Konfigurationseinstellungen mit einer Extension verteilen}
 
 \end{document}
