@@ -732,6 +732,132 @@ durch die Zeile:
 
 zu ersetzen.
 
+\section{Autokorrektur-Extension}
+
+Eine weitere schöne Möglichkeit besteht darin, LibreOffice eigene automatische Korrekturen (Autokorrektur) beizubringen und diese anschließend in eine Extension verpackt an andere Benutzer auszuliefern. Diese Autokorrektur-Funktion hat einen Beitragenden zu LibreOffice dazu gebracht, eine Erweiterung namens PCSteno für LibreOffice zu erstellen. Diese besteht aus einer selbst erstellten Autokorrektur-Datei \verb|acor_de-DE.dat|, die vom Anwender in das Unterverzeichnis \glqq autocorr\grqq~kopiert werden muss. Nach einem Neustart von LibreOffice kann damit mit wenigen Tastaturanschlägen Text schnell eingegeben werden. Der Benutzer muss allerdings die entsprechenden Kürzel/Abkürzungen erlernen; z.B. \glqq nmh\grqq~ für \glqq nicht mehr\grqq~ oder \glqq svj\grqq~ für \glqq soviel\grqq.
+
+Das Ganze lässt sich allerdings auch eleganter mit einer LibreOffice-Extension an den Anwender ausliefern. Wie dies funktioniert, soll nun kurz unter Verwenden des Beispiels PCSteno gezeigt werden. Zunächst muss ein neues Verzeichnis \glqq testpcsteno\grqq~ erstellt werden. Darin legen wir eine Datei \verb|descrciption.xml| etwa mit folgendem Inhalt an:
+
+\begin{lstlisting}
+<?xml version="1.0" encoding="UTF-8"?>
+<description
+    xmlns="http://openoffice.org/extensions/description/2006"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <identifier value="org.libreoffice.testpcsteno" />
+    <version value="0.2" />
+    <platform value="all" />
+    <display-name>
+        <name lang="de">Test PC Steno für Libreoffice</name>
+        <name lang="en">Test PC Steno for LibreOffice</name>
+    </display-name>
+    <publisher>
+        <name xlink:href="http://amantke.de/blog">
+        Andreas Mantke</name>
+    </publisher>
+</description>
+\end{lstlisting}
+
+Für das Beispiel habe ich im Wert (value) des Identifiers \glqq libreoffice\grqq~ als Namen des Unternehmems eingesetzt und als Veröffentlicher (Publisher) meinen eigenen Namen und mein Blog eingetragen. Für die Veröffentlichung der entsprechenden Extension sind diese Werte durch die Daten des Extension-Autors zu ersetzen.
+
+Damit die Extension auch deinstalliert werden kann, muss noch eine Datei \verb|manifest.xml| in einem Unterverzeichnis \verb|META-INF| hinzugefügt werden:
+\begin{lstlisting}
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest:manifest 
+  xmlns:manifest="http://openoffice.org/2001/manifest">
+    <manifest:file-entry
+     manifest:media-type="application/
+     vnd.sun.star.configuration-data" 
+     manifest:full-path ="paths.xcu"/>
+</manifest:manifest>
+\end{lstlisting}
+
+In dieser Datei wird eine Datei \verb|paths.xcu| referenziert, die nun noch zu erstellen ist mit folgendem Inhalt:
+
+\begin{lstlisting}
+<?xml version='1.0' encoding='UTF-8'?>
+
+<oor:component-data 
+    oor:package="org.openoffice.Office" 
+    oor:name="Paths" 
+    xmlns:install="http://openoffice.org/2004/installation" 
+    xmlns:oor="http://openoffice.org/2001/registry" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <node oor:name="Paths">
+        <node oor:name="AutoCorrect" oor:op="fuse">
+            <node oor:name="InternalPaths">
+                <node oor:name="%origin%/autocorr" 
+                  oor:op="fuse"/>
+                </node>
+            </node>
+    </node>
+</oor:component-data>
+\end{lstlisting}
+
+Nach den allgemeinen Definitionen werden in den Zeilen beginnend mit \glqq node\grqq~ die speziellen Daten für eine Autokorrektur-Extension gesetzt. Der oor:name wird mit \glqq AutoCorrect\grqq~ definiert und der Pfad wird auf das Verzeichnis \glqq autocorr\grqq~ gesetzt. Die übrigen Vorgaben in den Node-Tags entsprechen denen, die bereits weiter oben im Abschnitt zur Gallery-Extension besprochen wurden.
+
+Nun fehlt noch die Autokorrektur-Datei, die mit der Extension verteilt werden soll. Dazu wird ein neues Unterverzeichnis \verb|autocorr| angelegt, in das die Datei \verb|arcor_de-DE.dat| abgelegt wird.
+
+Die Extension kann nun mit dem Build-Skript, das oben im Abschnitt \glqq Erstellen der Extension-Datei\grqq~ beschrieben und erstellt wurde. Diese Datei \verb|build| mit dem enthaltenen Python-Skript muss sich ebenfalls im in diesem Abschnitt angelegten Verzeichnis \glqq testpcsteno\grqq~ befinden. Sein Aufruf ist ebenfalls oben beschrieben.
+
+\begin{center}
+	\includegraphics[width=0.9\linewidth]{pics/extensionmanager_autocorrect_extension_installed01}
+	\captionof{figure}{Anzeige Autokorrektur-Extension im Extension-Manager nach Installation}
+	\label{fig:autocorr_extension_extension_manager}
+\end{center}
+
+
+
+Es ist auch für Autokorrektur-Extensions möglich, die Autokorrekturen nach Lokalisierungen auszuliefern. Dazu ist die Zeile
+\begin{lstlisting}
+<node oor:name="%origin%/autocorr" oor:op="fuse"/>
+\end{lstlisting}
+
+durch
+\begin{lstlisting}
+<node oor:name="%origin%/autocorr/$(vlang)" oor:op="fuse"/>
+\end{lstlisting}
+
+zu ersetzen. In dem Unterverzeichnis ist für die auszuliefernden Lokalisierungen ein Unterverzeichnis anzulegen und die Autokorrektur-Datei dort abzulegen. Als Beispiel für die Lokalisierung Deutsch ist somit ein Unterverzeichnis \glqq de\grqq~ anzulegen und darin die Autokorrektur-Datei für diese Lokalisierung abzulegen.
+
+Mit der Installation der Autokorrektur-Extension wird allerdings für LibreOffice eine zuvor vom Benutzer erstellte eigene Autokorrektur-Liste(/-Datei) nicht mehr sichtbar. Sie bleibt zwar im Unterordner \glqq autocorr\grqq~ erhalten, die dort enthaltenen Korrekturen sind allerdings für den Benutzer nicht mehr verfügbar. Sie gehen jedoch nicht komplett verloren, sondern sind nach der Deinstallation der Autokorrektur-Extension für den Benutzer wieder verfügbar. Die mit der Extension übermittelte Autokorrektur-Datei genießt somit Priorität vor der Datei im Unterverzeichnis \glqq autocorr\grqq.
+
+Da sich bei der Einbindung von Extensions Änderungen ergeben haben, ist es wichtig, zumindest eine minimale Version von LibreOffice anzugeben. Da ältere Versionen von LibreOffice keine Sicherheitsupdates mehr erhalten, sollte als minimale Version zumindest LibreOffice 4.2 gewählt werden (mit dieser Version gab es einige Änderungen für Extensions). Der Datei \verb|description.xml| werden hierfür folgende Zeilen hinzugefügt:
+\begin{lstlisting}
+<dependencies xmlns:lo=
+  "http://libreoffice.org/extensions/description/2011">
+    <lo:LibreOffice-minimal-version name="LibreOffice 4.2" 
+      value="4.2"/>
+</dependencies>
+\end{lstlisting}
+
+Der Extension fehlt nun noch eine Beschreibung, die sowohl eine Erläuterung des Zwecks als auch der Funktionsweise der Extension gibt. Hierzu gibt es das Description-Tag, das auf eine entsprechende Textdatei mit der Beschreibung verweisen kann. Es ist dabei möglich, für jede Lokalisierung auf eine eigene Datei zu verweisen. Die hier als Beispiel gewählte Autokorrektur-Erweiterung PCSteno ist nur in deutscher Sprache lokalisiert. Es soll jedoch dennoch bereits die Lokale im Description-Tag vorgesehen werden. Die Ergänzung zur Datei \verb|description.xml| lautet dann folgendermaßen:
+\begin{lstlisting}
+<extension-description>
+    <src xlink:href="description/description_de.txt" 
+      lang="de" />
+</extension-descritption>
+\end{lstlisting}
+
+Nun muss noch ein Unterverzeichnis \glqq description\grqq~ erstellt und dort eine neue Textdatei \verb|description_de.txt| angelegt werden. Diese Datei kann einen längeren Beschreibungstext enthalten, es ist allerdings nicht sinnvoll, dort eine vollständige Dokumentation unterzubringen, da das Rendern im Extension-Manager bei längeren Texten nicht optimal ist. Es sollten daher nur einige grundsätzliche Erläuterungen und Hinweise aufgenommen werden und im Übrigen auf eine Datei mit der vollständigen Dokumentation verwiesen werden, die beispielsweise auf der LibreOffice Extensions-Website \verb|http://extensions.libreoffice.org/extensions| vom Autor der Extension zum Download (im Dateiformat ODT oder PDF) bereit gestellt werden kann.
+
+Bevor die Extension auf der LibreOffice Extensions-Website veröffentlicht werden kann, ist die Datei \verb|description.xml| noch um den Verweis auf die Lizenz zu ergänzen, unter der die Extension veröffentlicht wird und die vom Anwender bei der Installation akzeptiert werden muss. Hierzu wird zunächst ein weiteres Unterverzeichnis \glqq registration\grqq~ angelegt, in dem, gegebenenfalls in unterschiedlichen Lokalisierungen Dateien mit den Lizenztexten abgelegt werden, z.B. für die deutsche Lokalisierung \verb|license_de.txt|. 
+
+Anschließend wird die Datei \verb|description.xml| um folgende Eintragung ergänzt:
+\begin{lstlisting}
+<registration>
+    <simple-license accept-by="admin">
+        <license-text xlink:href="registration/license_de.txt" 
+          lang="de" />
+    </simple-license>
+</registration>
+\end{lstlisting}
+
+Unsere Beispiel-Autokorrektur-Extension ist zwar aktuell nur in deutscher Sprache lokalisiert, allerdings ist es immer sinnvoll, die Extension von Beginn an auf eine mögliche Lokalisierung in anderen Sprachen vorzubereiten.
+
+Sofern in Bezug auf ein Release der Extension besondere Informationen zu geben sind, insbesondere wenn sich die Bedienung verändert oder weitere Funktionen hinzugekommen sind, können der Extension besondere Release-Notes hinzugefügt werden. Hierzu gibt es das entsprechende XML-Tag. Allerdings werden diese Release-Notes dem Anwender in LibreOffice selbst aktuell nicht angezeigt. Er kann sich diese nur ansehen, wenn er die Extension-Datei entpackt und dort die Release-Notes-Datei mit einem Anzeigeprogramm für Textdateien oder einem Texteditor öffnet. Insoweit sind entsprechende Beigaben der Extension für den Anwender nur etwas erschwert wahrzunehmen. Dies sollte den Autor einer Extension trotzdem nicht davon abhalten, entsprechende Release-Notes der Extension beizufügen.
+
 \section{Farbpaletten-Extension}
 
 LibreOffice bringt eine Reihe von Farb-Paletten mit. Sie können sich die verfügbaren Paletten beispielsweise in dem Dialog \glqq Fläche\grqq~anzeigen lassen, den Sie im Programmmodul Draw im Menü \glqq Format\grqq~aufrufen können.
@@ -749,8 +875,10 @@ Zunächst erstellen Sie im Grundverzeichnis der Farbpaletten-Extension ein neues
 \begin{lstlisting}
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- https://meinefirma.de -->
-<ooo:color-table xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
-    xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0"
+<ooo:color-table xmlns:office=
+    "urn:oasis:names:tc:opendocument:xmlns:office:1.0"
+    xmlns:draw="urn:oasis:names:tc:
+      opendocument:xmlns:drawing:1.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:svg="http://www.w3.org/2000/svg"
     xmlns:ooo="http://openoffice.org/2004/office">
@@ -794,6 +922,7 @@ Wenn Sie die Datei mit der Farbpalette fertig gestellt haben, müssen Sie noch d
 Der Unterschied gegenüber den zuvor beschriebenen LibreOffice-Extensions besteht in der Bezeichnung hinter \glqq oor:name\grqq~, der nun \glqq Palette\grqq~lautet, sowie dem Pfad in dem weiteren Knoten, der nun auf das Unterverzeichnis \glqq palette\grqq~verweist.
 
 Mit der nun fertig gestellten Datei \glqq paths.xcu\grqq~können Sie die Extension wieder mit dem in der Vorlage enthaltenen Skript \glqq build\grqq~automatisch bauen lassen.
+
 
 \chapter{Konfigurationseinstellungen mit einer Extension verteilen}
 
