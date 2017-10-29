@@ -633,14 +633,15 @@ Sofern Sie Ihre Beispiel-Vorlagen-Extension mit solchen weiteren Unterverzeichni
 
 Die Benennung der Kategorie mit \glqq education\grqq~im Filter der Vorlagenverwaltung lässt sich wie auch die Benennung anderer Kategorien sprachlich anpassen. Dazu legen Sie im Verzeichnis \glqq template\grqq~der Extension eine neue Datei \glqq groupuinames.xml\grqq~an. Mit dieser werden dann für die einzelnen Kategorien die Namen gesetzt. Die Datei kann dann beispielsweise folgenden Inhalt bekommen:
 
-\begin{lstlisting}[language={[LaTeX]TeX},inputencoding={utf8},extendedchars=false]
+\begin{lstlisting}[language={[LaTeX]TeX},inputencoding={utf8},extendedchars=false, escapeinside=``]
 <?xml version="1.0" encoding="UTF-8"?>
 <groupuinames:template-group-list
-    xmlns:groupuinames="http://openoffice.org/2006/groupuinames">
+    xmlns:groupuinames=
+        "http://openoffice.org/2006/groupuinames">
     <groupuinames:template-group groupuinames:name="education"
         groupuinames:default-ui-name="Bildung" />
     <groupuinames:template-group groupuinames:name="presnt"
-        groupuinames:default-ui-name="Präsentationen" />
+        groupuinames:default-ui-name="Pr`ä`sentationen" />
 </groupuinames:template-group-list>
 
 \end{lstlisting}
