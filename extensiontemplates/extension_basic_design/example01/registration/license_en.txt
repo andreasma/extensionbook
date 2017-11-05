@@ -1,0 +1,1 @@
+This file contains the license text, that will be displayed to the user with English language setting and that has to be accepted by this user.
