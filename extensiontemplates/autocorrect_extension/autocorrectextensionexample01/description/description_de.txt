@@ -1,0 +1,1 @@
+Dies ist ein Dummy-Text.  Er ist durch die eigentliche Beschreibung der Funktion der Extension zu ersetzen. Der Beschreibungstext sollte nicht zu lang sein.
