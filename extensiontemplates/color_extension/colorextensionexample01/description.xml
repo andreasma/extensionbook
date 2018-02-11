@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description
+    xmlns="http://openoffice.org/extensions/description/2006"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <identifier value="org.mycompany.example01" />
+    <version value="0.1" />
+    <platform value="all" />
+    <display-name>
+        <name lang="de">Erste LibreOffice Beispiel-Farbpaletten-Extension</name>
+        <name lang="en">First LibreOffice example color extension</name>
+    </display-name>
+    <publisher>
+        <name xlink:href="http://amantke.de/blog">Andreas Mantke</name>
+    </publisher>
+    <icon>
+        <default xlink:href="images/extensionicon_42.png" />
+    </icon>
+    <dependencies xmlns:lo="http://libreoffice.org/extensions/description/2011">
+        <lo:LibreOffice-minimal-version name="LibreOffice 4.2" value="4.2"/>
+    </dependencies>
+    <extension-description>
+        <src xlink:href="description/description_en.txt" lang="en" />
+        <src xlink:href="description/description_de.txt" lang="de" />
+    </extension-description>
+    <registration>
+        <simple-license accept-by="admin">
+            <license-text xlink:href="registration/license_de.txt" lang="de" />
+            <license-text xlink:href="registration/license_en.txt" lang="en" />
+        </simple-license>
+    </registration>
+</description>
