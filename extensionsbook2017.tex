@@ -23,7 +23,18 @@
 \usepackage{listings}
 % \usepackage{capt-of}
 \usepackage{booktabs}
+\usepackage{url}
 \usepackage{hyperref}
+\def\UrlBreaks{%
+	\do\/%
+	\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l%
+	\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z%
+	\do\A\do\B\do\C\do\D\do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L%
+	\do\M\do\N\do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X\do\Y\do\Z%
+	\do0\do1\do2\do3\do4\do5\do6\do7\do8\do9\do=\do/\do.\do:%
+	\do\*\do\-\do\~\do\'\do\"\do\-}
+
+
 \definecolor{lightturquoise}{rgb}{0.9,0.8,0.7}
 \definecolor{honeydew}{rgb}{0.9,0.6,0.8}
 \definecolor{khaki}{rgb}{0.8,0.8,0.95}
@@ -79,6 +90,7 @@
 
 
 \tableofcontents
+\listoffigures
 
 \chapter*{Vorwort}
 
@@ -118,6 +130,7 @@ Bereits mit diesem rudimentären Inhalt könnte die Extension als komprimierter 
 
 Sofern sich bei der Vorgabe der Deklaration des Namespace im <description>-Tag ein Fehler (z.B. ein Tippfehler) eingeschlichen hat, erhalten Sie eventuell beim Versuch der Installation der Extension eine Fehlermeldung wie im Bildschirmfoto unten.
 \begin{center}
+	\captionsetup{type=figure}
 \includegraphics[width=0.7\linewidth]{pics/error_wrong_namedeclaration}
 \captionof{figure}{Fehlermeldung wegen fehlerhafter Namespace-Deklaration}
 \label{fig:error_wrong_namedeclaration}
@@ -276,6 +289,7 @@ Die Datei description.xml sieht nun wie folgt aus:
 
 Eine LibreOffice Extension benötigt zumindest eine Datei manifest.xml, die weitere Verwaltungsinformationen enthalten kann. Ohne diese Datei ließe sich die Extension zwar installieren, aber eine Deinstallation würde scheitern mit einer Fehlermeldung wie im folgenden Bildschirmfoto.
 \begin{center}
+	\captionsetup{type=figure}
 \includegraphics[width=0.7\linewidth]{pics/error_deinstallation_missing_manifest}
 \captionof{figure}{Fehlermeldung wegen fehlender Datei manifest.xml beim Entfernen der Extension}
 \label{fig:error_deinstallation_missing_manifest}
@@ -294,7 +308,7 @@ Wir legen dazu ein Unterverzeichnis \glqq META-INF\grqq~und in diesem eine neue 
 \section{Erstellen der Extension-Datei}
 
 Mit diesen ersten Versionen der Dateien description.xml und manfest.xml können wir nun eine Testversion der Extension-Datei erstellen und versuchen, die Extension noch ohne Funktionalität mit dem Extensionmanager zu installieren (und wieder zu deinstallieren)
-Bei der Extension-Datei (*.oxt) handelt es sich um einen komprimierten Container. Um diesen zu erstellen, können Sie dem für die Test-Extension erstellten folgendes Python-Buildskript hinzufügen. Dieses Skript hat Björn Michaelsen erstellt. Es steht unter der Mozilla Public License (MPL) und ist beispielsweise hier zu finden: \url{https://gerrit.libreoffice.org/gitweb?p=sdk-examples.git;a=blob;f=BundesGit/build;h=4e29b2addb081599100c5e8b48c384bbfff427ca;hb=HEAD}
+Bei der Extension-Datei (*.oxt) handelt es sich um einen komprimierten Container. Um diesen zu erstellen, können Sie dem für die Test-Extension erstellten folgendes Python-Buildskript hinzufügen. Dieses Skript hat Björn Michaelsen erstellt. Es steht unter der Mozilla Public License (MPL) und ist beispielsweise hier zu finden:\linebreak \url{https://gerrit.libreoffice.org/gitweb?p=sdk-examples.git;a=blob;f=BundesGit/build;h=4e29b2addb081599100c5e8b48c384bbfff427ca;hb=HEAD}
 
 Das Skript setzt voraus, dass im Verzeichnis eine weitere Textdatei mit dem Namen extensionname.txt vorhanden ist, die den Namen der Extension enthält, hier den Text
 \begin{lstlisting}
@@ -331,6 +345,7 @@ auf. Die Extension-Datei wird dadurch in dem Verzeichnis der Test-Extension erst
 
 Die gerade erstellte OXT-Datei installieren wir nun testweise mit dem Extensionmanager von LibreOffice. Wir starten dazu LibreOffice und wählen im Menü Extras den Eintrag "Extension Manager". In der sich öffnenden Dialogbox aktivieren wir die Schaltfläche "Hinzufügen" und navigieren in dem nun geöffneten Datei-Dialog zu der gerade erstellten OXT-Datei und bestätigen die Auswahl über die Schaltfläche "Öffnen". Die neue Extension sollte anschließend im Dialogfenster gelistet sein.
 \begin{center}
+	\captionsetup{type=figure}
 \includegraphics[width=0.7\linewidth]{pics/extensionmanager_extension_load01}
 \captionof{figure}{Der LibreOffice Extension Manager nach Installation der neuen Extension}
 \label{fig:extensionmanager_extension_load01}
@@ -468,7 +483,8 @@ Die Datei description.xml hat mit den weiteren vorgenommenen Ergänzungen nun fo
     </extension-description>
     <registration>
         <simple-license accept-by="admin">
-            <license-text xlink:href="registration/license_de.txt" 
+            <license-text 
+                xlink:href="registration/license_de.txt" 
                 lang="de" />
             <license-text xlink:href="registration/license_en.txt" 
                 lang="en" />
@@ -491,6 +507,7 @@ Bevor wir eine Gallery-Extension erstellen können, müssen wir zunächst mit Li
 Beginnen wir also mit dem Erstellen eines neuen Gallery-Themas in LibreOffice. Starten Sie das Programm. Die Gallery rufen Sie über das Menü \glqq Ansicht\grqq~und den dortigen Eintrag \glqq Gallery\grqq~auf. Die Gallery wird damit in der Seitenleiste geöffnet (früher wurde sie oberhalb des Bearbeitungsfensters unterhalb der Menüleiste angezeigt). Im oberen Bereich werden die vorhandenen Themen in Ihrem LibreOffice angezeigt Erstellen Sie nun über die Schaltfläche \glqq Neues Thema\grqq~und den folgenden Dialog ein solches Thema. Auf dem ersten Register (\glqq Allgemein\grqq) des Dialogs geben Sie einen Namen für das Thema vor. Sofern Sie bereits zuvor Grafiken, Zeichnungen oder Multimedia-Dateien erstellt haben, können Sie diese über das Register \glqq Dateien\grqq~direkt dem Thema hinzufügen. Wir nennen das Thema \glqq Tiere\grqq~, da wir einige Grafiken mit offenen Lizenzen aus dem Openclipart-Projekt in unserer Beispiel-Extension in der LibreOffice-Gallery verfügbar machen wollen.
 
 \begin{center}
+	\captionsetup{type=figure}
 	\includegraphics[width=0.9\linewidth]{pics/libreoffice_gallery}
 	\captionof{figure}{Die LibreOffice Gallery}
 	\label{fig:libreoffice_gallery}
@@ -504,6 +521,7 @@ Für unser gerade erstelltes Tier-Thema  in der Gallery laden wir mehrere Tiergr
 Zwar ist es möglich, SVG-Grafiken in die Gallery einzufügen, allerdings führt dies aktuell regelmäßig dazu, dass LibreOffice längere Zeit für das Hinzufügen benötigt, sehr viel Systemressourcen (CPU-Power) beansprucht und sich später auch beim Einfügen von Grafiken aus der Gallery in ein Dokument sehr viel Zeit nimmt bzw. scheitert. Die Grafiken sollten daher zunächst in ein Pixel-Dateiformat wie beispielsweise PNG umgewandelt werden. Dafür kann z.B. das Programm Inkscape (https://inkscape.org/de/) verwandt werden, sofern eine Umwandlung nicht auf der Kommandozeile erledigt werden soll.
 
 \begin{center}
+	\captionsetup{type=figure}
 	\includegraphics[width=0.9\linewidth]{pics/libreoffice_gallery_new_theme_with_graphics}
 	\captionof{figure}{Das neue Gallery-Thema mit einigen Grafiken}
 	\label{fig:libreoffice_gallery_new_theme_with_graphics}
@@ -625,6 +643,7 @@ Sie können auch weitere Unterverzeichnisse für themenspezifische Vorlagen anle
 Sofern Sie Ihre Beispiel-Vorlagen-Extension mit solchen weiteren Unterverzeichnissen mit entsprechenden Dokumentvorlagen ausgestattet haben, können Sie diese Themenbereiche in der Vorlagenverwaltung von LibreOffice gefiltert anzeigen lassen. Diesen Dialog rufen Sie über das Menü \glqq Datei - Vorlagen - Vorlagen verwalten\grqq~auf. Im Dialog können Sie dann filtern nach der Art der Dokumente, z.B. Textdokument, und nach Kategorien, z.B. Education. Sofern entsprechende Vorlagen vorhanden sind, werden Sie unten im Dialog angezeigt.
 
 \begin{center}
+	\captionsetup{type=figure}
 	\includegraphics[width=0.9\linewidth]{pics/template_administration_dialog_with_new_template_section}
 	\captionof{figure}{Der Dialog Vorlagen verwalten mit neuer Kategorie education}
 	\label{fig:template_administration_dialog_with_new_template_section}
@@ -683,6 +702,7 @@ Welche Textbausteine in der installierten Version von LibreOffice für den Benut
 \end{itemize}
 
 \begin{center}
+	\captionsetup{type=figure}
 	\includegraphics[width=0.9\linewidth]{pics/available_autotext}
 	\captionof{figure}{Anzeige der verfügbaren Textbausteine}
 	\label{fig:available_autotext}
@@ -799,11 +819,12 @@ In dieser Datei wird eine Datei \verb|paths.xcu| referenziert, die nun noch zu e
 
 Nach den allgemeinen Definitionen werden in den Zeilen beginnend mit \glqq node\grqq~ die speziellen Daten für eine Autokorrektur-Extension gesetzt. Der oor:name wird mit \glqq AutoCorrect\grqq~ definiert und der Pfad wird auf das Verzeichnis \glqq autocorr\grqq~ gesetzt. Die übrigen Vorgaben in den Node-Tags entsprechen denen, die bereits weiter oben im Abschnitt zur Gallery-Extension besprochen wurden.
 
-Nun fehlt noch die Autokorrektur-Datei, die mit der Extension verteilt werden soll. Dazu wird ein neues Unterverzeichnis \verb|autocorr| angelegt, in das die Datei \verb|arcor_de-DE.dat| abgelegt wird.
+Nun fehlt noch die Autokorrektur-Datei, die mit der Extension verteilt werden soll. Dazu erstellt man ein neues Unterverzeichnis \verb|autocorr|. In dieses wird sodann die Datei \verb|arcor_de-DE.dat| abgelegt.
 
 Die Extension kann nun mit dem Build-Skript, das oben im Abschnitt \glqq Erstellen der Extension-Datei\grqq~ beschrieben und erstellt wurde. Diese Datei \verb|build| mit dem enthaltenen Python-Skript muss sich ebenfalls im in diesem Abschnitt angelegten Verzeichnis \glqq testpcsteno\grqq~ befinden. Sein Aufruf ist ebenfalls oben beschrieben.
 
 \begin{center}
+	\captionsetup{type=figure}
 	\includegraphics[width=0.9\linewidth]{pics/extensionmanager_autocorrect_extension_installed01}
 	\captionof{figure}{Anzeige Autokorrektur-Extension im Extension-Manager nach Installation}
 	\label{fig:autocorr_extension_extension_manager}
@@ -865,6 +886,7 @@ Sofern in Bezug auf ein Release der Extension besondere Informationen zu geben s
 LibreOffice bringt eine Reihe von Farb-Paletten mit. Sie können sich die verfügbaren Paletten beispielsweise in dem Dialog \glqq Fläche\grqq~anzeigen lassen, den Sie im Programmmodul Draw im Menü \glqq Format\grqq~aufrufen können.
 
 \begin{center}
+	\captionsetup{type=figure}
 	\includegraphics[width=0.9\linewidth]{pics/dialog_flaeche}
 	\captionof{figure}{Der Dialog Fläche}
 	\label{fig:dialog_flaeche}
