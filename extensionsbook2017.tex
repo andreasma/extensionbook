@@ -762,6 +762,9 @@ durch die Zeile:
 
 zu ersetzen.
 
+Eine entsprechende Vorlage für eine LibreOffice AutoText-Extension finden Sie im Github-Repository unter folgender Adresse:
+\url{https://github.com/andreasma/extensionbook/tree/master/extensiontemplates/auto-text_extension/autotextextensionexample01}.
+
 \section{Autokorrektur-Extension}
 
 Eine weitere schöne Möglichkeit besteht darin, LibreOffice eigene automatische Korrekturen (Autokorrektur) beizubringen und diese anschließend in eine Extension verpackt an andere Benutzer auszuliefern. Diese Autokorrektur-Funktion hat einen Beitragenden zu LibreOffice dazu gebracht, eine Erweiterung namens PCSteno für LibreOffice zu erstellen. Diese besteht aus einer selbst erstellten Autokorrektur-Datei \verb|acor_de-DE.dat|, die vom Anwender in das Unterverzeichnis \glqq autocorr\grqq~kopiert werden muss. Nach einem Neustart von LibreOffice kann damit mit wenigen Tastaturanschlägen Text schnell eingegeben werden. Der Benutzer muss allerdings die entsprechenden Kürzel/Abkürzungen erlernen; z.B. \glqq nmh\grqq~ für \glqq nicht mehr\grqq~ oder \glqq svj\grqq~ für \glqq soviel\grqq.
@@ -889,6 +892,10 @@ Unsere Beispiel-Autokorrektur-Extension ist zwar aktuell nur in deutscher Sprach
 
 Sofern in Bezug auf ein Release der Extension besondere Informationen zu geben sind, insbesondere wenn sich die Bedienung verändert oder weitere Funktionen hinzugekommen sind, können der Extension besondere Release-Notes hinzugefügt werden. Hierzu gibt es das entsprechende XML-Tag. Allerdings werden diese Release-Notes dem Anwender in LibreOffice selbst aktuell nicht angezeigt. Er kann sich diese nur ansehen, wenn er die Extension-Datei entpackt und dort die Release-Notes-Datei mit einem Anzeigeprogramm für Textdateien oder einem Texteditor öffnet. Insoweit sind entsprechende Beigaben der Extension für den Anwender nur etwas erschwert wahrzunehmen. Dies sollte den Autor einer Extension trotzdem nicht davon abhalten, entsprechende Release-Notes der Extension beizufügen.
 
+Eine entsprechende Vorlage für eine LibreOffice Autokorrektur-Extension finden Sie im Github-Repository unter folgender Adresse:
+\url{https://github.com/andreasma/extensionbook/tree/master/extensiontemplates/autocorrect_extension/autocorrectextensionexample01}.
+
+
 \section{Farbpaletten-Extension}
 
 LibreOffice bringt eine Reihe von Farb-Paletten mit. Sie können sich die verfügbaren Paletten beispielsweise in dem Dialog \glqq Fläche\grqq~anzeigen lassen, den Sie im Programmmodul Draw im Menü \glqq Format\grqq~aufrufen können.
@@ -954,6 +961,9 @@ Wenn Sie die Datei mit der Farbpalette fertig gestellt haben, müssen Sie noch d
 Der Unterschied gegenüber den zuvor beschriebenen LibreOffice-Extensions besteht in der Bezeichnung hinter \glqq oor:name\grqq~, der nun \glqq Palette\grqq~lautet, sowie dem Pfad in dem weiteren Knoten, der nun auf das Unterverzeichnis \glqq palette\grqq~verweist.
 
 Mit der nun fertig gestellten Datei \glqq paths.xcu\grqq~können Sie die Extension wieder mit dem in der Vorlage enthaltenen Skript \glqq build\grqq~automatisch bauen lassen.
+
+Eine entsprechende Vorlage für eine LibreOffice Farbpaletten-Extension finden Sie im Github-Repository unter folgender Adresse:
+\url{https://github.com/andreasma/extensionbook/tree/master/extensiontemplates/color_extension/colorextensionexample01}.
 
 
 \chapter{Konfigurationseinstellungen mit einer Extension verteilen}
