@@ -975,7 +975,35 @@ entsprechendes neues Icon-Set für LibreOffice bereits selbst erstellt haben ode
 
 \section{Bauen der Icon-Set-Extension}
 
-Zunächst erstellen Sie im Grundverzeichnis der neuen Icon-Set-Extension ein Unterverzeichnis mit dem Namen \glqq iconsets\grqq. In dieses Unterzeichnis kopieren Sie Ihr neues Icon-Set als Zip-Archiv.
+Zunächst erstellen Sie im Grundverzeichnis der neuen Icon-Set-Extension ein Unterverzeichnis mit dem Namen \glqq iconsets\grqq. In dieses Unterzeichnis kopieren Sie Ihr neues Icon-Set als Zip-Archiv. Des weiteren erstellen Sie noch ein weiteres Unterverzeichnis mit dem Namen \glqq icons\grqq, in das Sie die Grafik im PNG-Dateiformat ablegen, die im Extension-Manager später angezeigt werden soll. Sinnvoller Weise sollte dies ein kleines Vorschaubildchen auf Ihr Icon-Set bzw. auf eine Auswahl Ihrer Icons sein, damit der Benutzer das Icon-Set visuell zuordnen 
+kann.
+
+In einem weiteren Unterverzeichnis, das Sie mit \glqq description\grqq benennen können, erstellen Sie eine Textdatei im Dateiformat *.txt. In diese fügen Sie die Beschreibung Ihrer Icon-Set-Extension ein, die später im Extension-Manager-Dialog angezeigt wird. Sie sollte nicht zu lang sein, da sie ansonsten im Dialogfenster für den Benutzer unschön dargestellt wird.
+
+Ein weiteres Unterverzeichnis mit dem Namen \glqq META-INF\grqq legen Sie an, um dort die Datei \glqq manifest.xml\grqq anzulegen. Diese Datei erhält folgenden Inhalt:
+
+\begin{lstlisting}
+<?xml version="1.0" encoding="UTF-8"?>
+<m:manifest xmlns:m="http://openoffice.org/2001/manifest">
+    <m:file-entry m:media-type="application/
+      vnd.sun.star.configuration-data"
+      m:full-path="config.xcu"/>
+</m:manifest>
+\end{lstlisting}
+
+In dieser Manifest-Datei wird auf eine weitere Datei mit dem Namen \glqq config.xcu\grqq verwiesen. Diese erstellen Sie im Grundverzeichnis Ihrer Extension nun mit folgendem Inhalt:
+
+\begin{lstlisting}
+<?xml version="1.0" encoding="UTF-8"?>
+<oor:items xmlns:oor="http://openoffice.org/2001/registry">
+    <item oor:path="/org.openoffice.Office.Paths/
+      Paths/Iconset/InternalPaths">
+        <node oor:name="%origin%/iconsets" oor:op="fuse"/>
+    </item>
+</oor:items>
+\end{lstlisting}
+
+
 
 \chapter{Konfigurationseinstellungen mit einer Extension verteilen}
 
