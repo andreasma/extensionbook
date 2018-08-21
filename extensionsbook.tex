@@ -1003,7 +1003,50 @@ In dieser Manifest-Datei wird auf eine weitere Datei mit dem Namen \glqq config.
 </oor:items>
 \end{lstlisting}
 
+In dieser Datei teilen Sie dem Extension-Manager mit, wo er das Icon-Set platzieren soll, und zwar in dem entsprechenden internen Pfad.  Das Schlüsselwort \glqq fuse\grqq~
+bewirkt das Vereinigen von bisherigem Icon-Set mit Ihrem hinzugefügten Set von Icons.
 
+Als nächstes müssen Sie noch eine Lizenz Ihrer Icon-Set-Extension hinzufügen, die später bei der Installation dem Benutzer angezeigt wird. Dazu erstellen Sie ein neues Unterverzeichnis \glqq license\grqq, in das Sie die Lizenzdateien im Dateiformat *.txt ablegen. Sie können hier eine Datei für jede von Ihrer Extension unterstützte Sprache hinterlegen, also beispielsweise \glqq license\_en.txt\grqq~für die englische Version und \glqq license\_de.txt\grqq für die deutsche Version der Lizenz.
+
+Zum Schluss erstellen Sie nun noch die Datei \glqq description.xml\grqq~im Grundverzeichnis. Diese hat beispielsweise folgenden Inhalt:
+
+\begin{lstlisting}
+<?xml version='1.0' encoding='UTF-8'?>
+<description
+  xmlns="http://openoffice.org/extensions/description/2006"
+  xmlns:dep="http://openoffice.org/extensions/description/2006"
+  xmlns:lo="http://libreoffice.org/extensions/description/2011"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+    <identifier value="org.mycompany.myiconsetname"/>
+    <version value="0.1"/>
+    <display-name>
+      <name lang="de">Meine Icon-Set-MeineExtension</name>
+      <name lang="en">My Icon Set Extension</name>
+    </display-name>
+    <dependencies>
+        <lo:LibreOffice-minimal-version 
+           d:name="LibreOffice 6.0" value="6.0"/>
+    </dependencies>
+    <publisher>
+        <name xlink:href="http://amantke.de/blog">
+          Andreas Mantke</name>
+    </publisher>
+    <icon>
+        <default xlink:href="icons/iconsetname.png"/>
+    </icon>
+    <registration>
+        <simple-license accept-by="admin">
+            <license-text xlink:href="registration/license_de.txt" 
+               lang="de" />
+            <license-text xlink:href="registration/license_en.txt" 
+               lang="en" />
+        </simple-license>
+    </registration>
+    <extension-description>
+        <src xlink:href="description/description.txt" />
+    </extension-description>
+</description>
+\end{lstlisting}
 
 \chapter{Konfigurationseinstellungen mit einer Extension verteilen}
 
