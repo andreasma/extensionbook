@@ -113,7 +113,7 @@ Alle Erweiterungen von LibreOffice werden in einer komprimierten Container-Datei
 
 \chapter{Der Container OXT und sein Inhalt}\label{oxtcontainerinhalt}
 Innerhalb des komprimierten Datei-Containers OXT befinden sich mehrere Dateien und es ist regelmäßig auch eine spezielle Struktur angelegt. Diese Struktur und der Inhalt der einzelnen Dateien des Containers sollen nun anhand eines konkreten Beispiels erläutert werden. Diese Beispielextension soll den Namen myfirstextension.oxt führen. Wir erstellen dazu zunächst ein Verzeichnis mit dem Namen myfirstextension. In diesem erzeugen wir dann die Textdatei description.xml, die wir im folgenden Abschnitt bearbeiten.
-\section{Die Datei description.xml}
+\section{Die Datei description.xml}\label{description_xml}
 Wir öffnen nun die zuvor erstellte Datei description.xml mit einem Texteditor. Diese Datei wird die wesentlichen Verwaltungsinformationen der Extension enthalten.
 Sie startet mit einer XML-Deklaration einschließlich Encoding:
 \begin{lstlisting}
@@ -307,7 +307,7 @@ Zu den möglichen weiteren Inhalten dieser Datei wird an späterer Stelle  in di
 
 
 
-\section{Erstellen der Extension-Datei}
+\section{Erstellen der Extension-Datei}\label{extensiondateierstellen}
 
 Mit diesen ersten Versionen der Dateien description.xml und manfest.xml können wir nun eine Testversion der Extension-Datei erstellen und versuchen, die Extension noch ohne Funktionalität mit dem Extensionmanager zu installieren (und wieder zu deinstallieren)
 Bei der Extension-Datei (*.oxt) handelt es sich um einen komprimierten Container. Um diesen zu erstellen, können Sie dem für die Test-Extension erstellten folgendes Python-Buildskript hinzufügen. Dieses Skript hat Björn Michaelsen erstellt. Es steht unter der Mozilla Public License (MPL) und ist beispielsweise hier zu finden:\linebreak \url{https://gerrit.libreoffice.org/gitweb?p=sdk-examples.git;a=blob;f=BundesGit/build;h=4e29b2addb081599100c5e8b48c384bbfff427ca;hb=HEAD}
@@ -359,7 +359,7 @@ Auf der rechten Seite des Eintrags für die neue Extension befindet sich der Nam
 
 Markieren Sie nun den neuen Eintrag im LibreOffice Extension Manager und deinstallieren Sie die Extension wieder über die nun angezeigte Schaltfläche "Entfernen". Die Extension sollte sich damit nach Bestätigen des folgenden Benutzerdialogs fehlerfrei entfernen lassen. Sofern dies nicht der Fall ist, könnte dies beispielsweise an einer fehlenden Datei manifest.xml (siehe dazu oben).
 
-\section{Weitere Einträge in der Datei description.xml}
+\section{Weitere Einträge in der Datei description.xml}\label{weitere_eintraege_description}
 
 Auf der Abbildung im letzten Abschnitt ist zu sehen, dass für die Test-Extension im LibreOffice Extension Manager keine Grafik bzw. ein Logo angezeigt wird, wie beispielsweise für den MySQL Connector. Um ein solches Logo einzubinden, existiert der <icon>-Tag.
 
@@ -1047,6 +1047,15 @@ Zum Schluss erstellen Sie nun noch die Datei \glqq description.xml\grqq~im Grund
     </extension-description>
 </description>
 \end{lstlisting}
+    
+Eine Beschreibung der einzelnen XML-Tags der Datei \glqq description.xml\grqq~ und ihrer Bedeutung finden Sie in den Abschnitten \ref{description_xml} und \ref{weitere_eintraege_description}.
+
+Zum Abschluss erstellen Sie im Grundverzeichnis Ihrer Extension noch eine Text-Datei mit dem Namen \glqq extensionname.txt\grqq, die den Namen der Extension enthält, hier z.B. den Text:
+\begin{lstlisting}
+myiconsetextension.oxt
+\end{lstlisting}
+
+Danach fügen Sie noch das Build-Script aus dem Kapitel \ref{extensiondateierstellen} in das Grundverzeichnis ein und lassen Ihre Extension durch dieses Skript wie dort beschrieben bauen.
 
 \chapter{Konfigurationseinstellungen mit einer Extension verteilen}
 
