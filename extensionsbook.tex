@@ -94,9 +94,9 @@
 
 \chapter*{Vorwort}
 
-Für das Entwickeln von LibreOffice finden sich Informationen auf verschiedenen Ressourcen. Zum Teil muss ersatzweise auf - nicht immer noch aktuelle - Informationen zu OpenOffice.org zurückgegriffen werden. Das Ziel dieses Dokumentes ist es, möglichst detaillierte Informationen zur eigenständigen Entwicklung von neuen LibreOffice Extensions zu geben. Die Darstellung soll dabei anhand von Beispielen erfolgen. Diese werden die unterschiedlichen Bereiche beleuchten, mit denen sich weitere oder besondere Inhalte oder neue bzw. erweiterte Funktionen zu LibreOffice hinzugefügt werden können. Es geht also sowohl um beispielsweise das Hinzufügen von eigenen Themen zur sogenannten Gallery wie auch um weitere Funktionalität unter Verwenden von Programmiersprachen, wie z.B. Python. Für die letztere Programmiersprache bringt LibreOffice bereits eine Umgebung von Python 3 mit.
+Für das Entwickeln von LibreOffice finden sich Informationen auf verschiedenen Ressourcen. Zum Teil muss ersatzweise auf - nicht unbedingt noch aktuelle - Informationen zu OpenOffice.org zurückgegriffen werden. Das Ziel dieses Dokumentes ist es, möglichst detaillierte Informationen zur eigenständigen Entwicklung von neuen LibreOffice Extensions zu geben. Die Darstellung soll dabei anhand von Beispielen erfolgen. Diese werden die unterschiedlichen Bereiche beleuchten, mit denen weitere oder besondere Inhalte oder neue bzw. erweiterte Funktionen zu LibreOffice hinzugefügt werden können. Es geht also sowohl um beispielsweise das Hinzufügen von eigenen Themen zur sogenannten Gallery wie auch um weitere Funktionalität unter Verwenden von Programmiersprachen, wie z.B. Python. Für die letztere Programmiersprache bringt LibreOffice bereits eine Umgebung von Python 3 mit.
 
-Das Dokument ist eine Arbeit im Fluss und wird nach und nach um weitere Kapitel ergänzt werden. Es ist aktuell nur in deutscher Sprache verfügbar. Eine Lokalisation in anderen Sprachen ist aber für die Zukunft eine Option.
+Das Dokument ist eine Arbeit im Fluss und wird nach und nach um weitere Kapitel ergänzt werden. Es ist aktuell nur in deutscher Sprache verfügbar. Eine Lokalisation in andere Sprachen ist aber für die Zukunft eine Option.
 
 \chapter{Arten von Erweiterungen}
 Für LibreOffice können Sie Extensions (Erweiterungen) erstellen, die mit verschiedenen Programmiersprachen arbeiten. Es sind die folgenden Sprachen verfügbar:
@@ -112,9 +112,9 @@ Außerdem können Sie mit Extensions auch Konfigurationsdateien für LibreOffice
 Alle Erweiterungen von LibreOffice werden in einer komprimierten Container-Datei mit der Dateiendung .oxt gepackt. Sie können, sofern Sie unter einer freien Software-Lizenz stehen, über die Seite https://extensions.libreoffice.org veröffentlicht und geteilt bzw. zum Download angeboten werden.
 
 \chapter{Der Container OXT und sein Inhalt}\label{oxtcontainerinhalt}
-Innerhalb des komprimierten Datei-Containers OXT befinden sich mehrere Dateien und es ist regelmäßig auch eine spezielle Struktur angelegt. Diese Struktur und der Inhalt der einzelnen Dateien des Containers sollen nun anhand eines konkreten Beispiels erläutert werden. Diese Beispielextension soll den Namen myfirstextension.oxt führen. Wir erstellen dazu zunächst ein Verzeichnis mit dem Namen myfirstextension. In diesem erzeugen wir dann die Textdatei description.xml, die wir im folgenden Abschnitt bearbeiten.
+Innerhalb des komprimierten Datei-Containers OXT befinden sich mehrere Dateien und es ist regelmäßig auch eine spezielle Struktur angelegt. Diese Struktur und der Inhalt der einzelnen Dateien des Containers sollen nun anhand eines konkreten Beispiels erläutert werden. Diese Beispielextension soll den Namen \glqq myfirstextension.oxt\grqq{} führen. Wir erstellen dazu zunächst ein Verzeichnis mit dem Namen \glqq myfirstextension\grqq. In diesem erzeugen wir dann die Textdatei description.xml, die wir im folgenden Abschnitt bearbeiten.
 \section{Die Datei description.xml}\label{description_xml}
-Wir öffnen nun die zuvor erstellte Datei description.xml mit einem Texteditor. Diese Datei wird die wesentlichen Verwaltungsinformationen der Extension enthalten.
+Wir öffnen nun die zuvor erstellte Datei \glqq description.xml\grqq{} mit einem Texteditor. Diese Datei wird die wesentlichen Verwaltungsinformationen der Extension enthalten.
 Sie startet mit einer XML-Deklaration einschließlich Encoding:
 \begin{lstlisting}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -154,9 +154,10 @@ Als nächstes fügen wir die Angabe der Versionsnummer (Release-Nummer) der Exte
 \end{lstlisting}
 Als Werte (Value) kommen hier positive Zahlen in Betracht, die eine Versionsnummer der Extension darstellen können. Die Versions-Nummer kann aus lediglich einer positiven Ziffer (größer Null) oder einer Kolonne von mehreren durch Punkt getrennten Ziffern bestehen, z.B. 0.1.3. Das Benennungsschema sollte dabei den üblichen Geflogenheiten folgen. Die erste Ziffer bezeichnet insoweit Major-(Haupt-)Releases (mit eventueller Inkompatibilität zu bisherigen Haupt-Releases). Die zweite Ziffer steht für Änderungen im Sinne von Minor-Releases (mit kompatiblen Änderungen), während die dritte Ziffer Micro-Releases anzeigt (mit beispielsweise Fehlerbereinigungen).
 
+\newpage
 \paragraph*{Plattform}$~~$\\
 
-Eine LibreOffice Extension kann sowohl für alle Plattformen von LibreOffice lauffähig sein, als auch lediglich für einzelne. Dies wird über das Platform-Tag gesteuert. Wir gehen davon aus, dass die Extension für alle Plattformen geeignet ist und fügen daher folgendes Zeile ein:
+Eine LibreOffice Extension kann sowohl für alle Plattformen von LibreOffice lauffähig sein, als auch lediglich für einzelne. Dies wird über das Platform-Tag gesteuert. Wir gehen davon aus, dass die Extension für alle Plattformen geeignet ist und fügen daher folgende Zeile ein:
 \begin{lstlisting}
 <platform value="all" />
 \end{lstlisting}
@@ -170,7 +171,7 @@ Die Extension kann nur installiert werden, wenn eine der angegebenen Plattformen
 \end{lstlisting}
 Der Extensionmanager von LibreOffice kann hier keine Plattform (Betriebssystem) ausfindig machen, auf dem die Extension lauffähig ist, und bricht daher die Installation ab.
 
-Die folgende Tabelle listet alle möglichen Plattformen auf, die als Wert verwendet werden können, unabhängig davon, ob sie von LibreOffice unterstützt werden.\linebreak
+Die folgende Tabelle listet alle möglichen Plattformen auf, die als Wert verwendet werden können, unabhängig davon, ob sie von LibreOffice unterstützt werden oder nicht.\linebreak
 
 
 \begin{tabular}{ |p{3cm}|p{9cm} | }
@@ -243,7 +244,7 @@ Teilweise wird ein LibreOffice-32-bit-Build auch auf 64-bit-Linux-Plattformen au
 Als nächstes fügen wir dem Description-Tag einen Namen hinzu, der im Extensionmanager angezeigt wird. Dieser Name kann auch für die einzelne Lokalisierungen vorgegeben werden. Der umschließende Tag lautet <display-name>.
 Der angezeigte Name wird dann in einem oder mehreren <name>-Tags vorgegeben.
 
-Sofern der <name>-Tag einen Zusatz bzgl. der Sprache (lang) enthält, wird dieser Text für die entsprechende Lokalisierung angezeigt. Ohne einen solchen Zusatz bzw. für andere Lokalisierungen ohne eigenen <name>-Tag wird der Standard bzw. die englische Version angezeigt. Für unsere Beispiel-Extension geben fügen wir dem Description-Tag folgendes hinzu:
+Sofern der <name>-Tag einen Zusatz bzgl. der Sprache (lang) enthält, wird dieser Text für die entsprechende Lokalisierung angezeigt. Ohne einen solchen Zusatz bzw. für andere Lokalisierungen ohne eigenen <name>-Tag wird der Standard bzw. die englische Version angezeigt. Für unsere Beispiel-Extension fügen wir dem Description-Tag folgendes hinzu:
 \begin{lstlisting}
 <display-name>
     <name lang="de">Meine erste LibreOffice Extension</name>
@@ -260,7 +261,7 @@ Nun fügen wir noch den Autor über das <publisher>-Tag der Description hinzu. I
 </publisher>
 \end{lstlisting}
 Der <publisher>-Tag muss zumindest einen <name>-Tag haben. Letzterer Tag kann wieder für unterschiedliche Lokalisierungen über einen lang-Zusatz vorgegeben werden. Der <name>-Tag selbst enthält eine URL zusammen mit dem ggfs. lokalisierten Namen des Autors.
-
+\newpage
 Die Datei description.xml sieht nun wie folgt aus:
 \begin{lstlisting}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -287,7 +288,7 @@ Die Datei description.xml sieht nun wie folgt aus:
 
 \section{Meta-Informationen}
 
-Eine LibreOffice Extension benötigt zumindest eine Datei manifest.xml, die weitere Verwaltungsinformationen enthalten kann. Ohne diese Datei ließe sich die Extension zwar installieren, aber eine Deinstallation würde scheitern mit einer Fehlermeldung wie im folgenden Bildschirmfoto.
+Eine LibreOffice Extension benötigt zumindest eine Datei \glqq manifest.xml\grqq, die weitere Verwaltungsinformationen enthalten kann. Ohne diese Datei ließe sich die Extension zwar installieren, aber eine Deinstallation würde scheitern mit einer Fehlermeldung wie im folgenden Bildschirmfoto.
 \begin{center}
 	\captionsetup{type=figure}
 \includegraphics[width=0.7\linewidth]{pics/error_deinstallation_missing_manifest}
@@ -296,6 +297,7 @@ Eine LibreOffice Extension benötigt zumindest eine Datei manifest.xml, die weit
 \end{center}
 
 Wir legen dazu ein Unterverzeichnis \glqq META-INF\grqq~und in diesem eine neue Datei manifest.xml an. Die Datei bekommt zunächst nur folgenden Inhalt:
+\newpage
 \begin{lstlisting}
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest:manifest 
@@ -303,7 +305,7 @@ Wir legen dazu ein Unterverzeichnis \glqq META-INF\grqq~und in diesem eine neue 
 </manifest:manifest>
 \end{lstlisting}
 
-Zu den möglichen weiteren Inhalten dieser Datei wird an späterer Stelle  in diesem Dokument Näheres erläutert.
+Zu den möglichen weiteren Inhalten dieser Datei wird an späterer Stelle in diesem Dokument Näheres erläutert.
 
 
 
