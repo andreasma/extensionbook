@@ -311,14 +311,14 @@ Zu den möglichen weiteren Inhalten dieser Datei wird an späterer Stelle in die
 
 \section{Erstellen der Extension-Datei}\label{extensiondateierstellen}
 
-Mit diesen ersten Versionen der Dateien description.xml und manfest.xml können wir nun eine Testversion der Extension-Datei erstellen und versuchen, die Extension noch ohne Funktionalität mit dem Extensionmanager zu installieren (und wieder zu deinstallieren)
-Bei der Extension-Datei (*.oxt) handelt es sich um einen komprimierten Container. Um diesen zu erstellen, können Sie dem für die Test-Extension erstellten folgendes Python-Buildskript hinzufügen. Dieses Skript hat Björn Michaelsen erstellt. Es steht unter der Mozilla Public License (MPL) und ist beispielsweise hier zu finden:\linebreak \url{https://gerrit.libreoffice.org/gitweb?p=sdk-examples.git;a=blob;f=BundesGit/build;h=4e29b2addb081599100c5e8b48c384bbfff427ca;hb=HEAD}
+Mit diesen ersten Versionen der Dateien description.xml und manfest.xml können wir nun eine Testversion der Extension-Datei erstellen und versuchen, die Extension noch ohne Funktionalität mit dem Extensionmanager zu installieren (und wieder zu deinstallieren).
+Bei der Extension-Datei (*.oxt) handelt es sich um einen komprimierten Container. Um diesen zu erstellen, können Sie dem für die Test-Extension erstellten Verzeichnis folgendes Python-Buildskript hinzufügen. Dieses Skript hat Björn Michaelsen erstellt. Es steht unter der Mozilla Public License (MPL) und ist beispielsweise hier zu finden:\linebreak \url{https://gerrit.libreoffice.org/gitweb?p=sdk-examples.git;a=blob;f=BundesGit/build;h=4e29b2addb081599100c5e8b48c384bbfff427ca;hb=HEAD}
 
-Das Skript setzt voraus, dass im Verzeichnis eine weitere Textdatei mit dem Namen extensionname.txt vorhanden ist, die den Namen der Extension enthält, hier den Text
+Das Skript setzt voraus, dass im Verzeichnis eine weitere Textdatei mit dem Namen extensionname.txt vorhanden ist, die den Namen der Extension enthält. Dieser lautet für unsere erste Beispiel-Extension:
 \begin{lstlisting}
 myfirstextension.oxt
 \end{lstlisting}
-Das Build-Skript mit dem Namen build sieht folgendermaßen aus:
+Das Build-Skript mit dem Namen \glqq build\grqq{} sieht folgendermaßen aus:
 \begin{lstlisting}
 #!/usr/bin/env python
 # This Source Code Form is subject to the terms of the 
@@ -339,7 +339,7 @@ with ZipFile(extensionname, 'w') as tuesdayzip:
             if not name == extensionname:
                 tuesdayzip.write(os.path.join(root, name)) 
 \end{lstlisting}
-Da das Skript in der Programm-Sprache Python geschrieben ist, müssen Sie darauf achten, dass die Einrückungen korrekt übernommen werden. Das Skript selbst rufen Sie später einfach mit
+Da das Skript in der Programmier-Sprache Python geschrieben ist, müssen Sie darauf achten, dass die Einrückungen korrekt übernommen werden. Das Skript selbst rufen Sie später einfach mit
 \begin{lstlisting}
 python ./build
 \end{lstlisting}
@@ -347,7 +347,7 @@ auf. Die Extension-Datei wird dadurch in dem Verzeichnis der Test-Extension erst
 
 \section{Erste Testinstallation der Extension}
 
-Die gerade erstellte OXT-Datei installieren wir nun testweise mit dem Extensionmanager von LibreOffice. Wir starten dazu LibreOffice und wählen im Menü Extras den Eintrag "Extension Manager". In der sich öffnenden Dialogbox aktivieren wir die Schaltfläche "Hinzufügen" und navigieren in dem nun geöffneten Datei-Dialog zu der gerade erstellten OXT-Datei und bestätigen die Auswahl über die Schaltfläche "Öffnen". Die neue Extension sollte anschließend im Dialogfenster gelistet sein.
+Die gerade erstellte OXT-Datei installieren wir nun testweise mit dem Extensionmanager von LibreOffice. Wir starten dazu LibreOffice und wählen im Menü Extras den Eintrag \glqq Extension Manager\grqq. In der sich öffnenden Dialogbox aktivieren wir die Schaltfläche \glqq Hinzufügen\grqq{} und navigieren in dem nun geöffneten Datei-Dialog zu der gerade erstellten OXT-Datei und bestätigen die Auswahl über die Schaltfläche \glqq Öffnen\grqq. Die neue Extension sollte anschließend im Dialogfenster gelistet sein.
 \begin{center}
 	\captionsetup{type=figure}
 \includegraphics[width=0.7\linewidth]{pics/extensionmanager_extension_load01}
@@ -357,9 +357,9 @@ Die gerade erstellte OXT-Datei installieren wir nun testweise mit dem Extensionm
 
 
 
-Auf der rechten Seite des Eintrags für die neue Extension befindet sich der Name des Autors verbunden mit einem Link zu der URL, die in dem <name>-Tag innerhalb des <publisher>-Tags angegeben wurde. Dieser kann mit einem Mausklick im Standard-Browser aufgerufen werden.
+Auf der rechten Seite des Eintrags für die neue Extension befindet sich der Name des Autors verbunden mit einem Link zu der URL, die in dem <name>-Tag innerhalb des <publisher>-Tags angegeben wurde. Dieser Link kann mit einem Mausklick im Standard-Browser aufgerufen werden.
 
-Markieren Sie nun den neuen Eintrag im LibreOffice Extension Manager und deinstallieren Sie die Extension wieder über die nun angezeigte Schaltfläche "Entfernen". Die Extension sollte sich damit nach Bestätigen des folgenden Benutzerdialogs fehlerfrei entfernen lassen. Sofern dies nicht der Fall ist, könnte dies beispielsweise an einer fehlenden Datei manifest.xml (siehe dazu oben).
+Markieren Sie nun den neuen Eintrag im LibreOffice Extension Manager und deinstallieren Sie die Extension wieder über die nun angezeigte Schaltfläche \glqq Entfernen\grqq. Die Extension sollte sich damit nach Bestätigen des folgenden Benutzerdialogs fehlerfrei entfernen lassen. Sofern dies nicht der Fall ist, könnte dies beispielsweise an einer fehlenden Datei manifest.xml (siehe dazu oben) liegen.
 
 \section{Weitere Einträge in der Datei description.xml}\label{weitere_eintraege_description}
 
@@ -380,7 +380,7 @@ In dem Tag hinter \glqq xlink:href \grqq wird die relative URL zu der Grafikdate
 
 \paragraph*{Minimale LibreOffice Version}$~~$\\
 
-Es ist möglich, für die Extension eine minimale Version von LibreOffice anzugeben. Dies geschieht über den <dependencies>-Tag. Dieser Tag braucht eine Namespace-Deklaration, die hinter \glqq xmlns:lo \grqq erfolgt. Innerhalb der <dependencies>-Tag wird dann mit einem weiteren Tag die minimale LibreOffice-Version, für das Beispiel Version 4.2.
+Es ist möglich, für die Extension eine minimale Version von LibreOffice anzugeben. Dies geschieht über den <dependencies>-Tag. Dieser Tag braucht eine Namespace-Deklaration, die hinter \glqq xmlns:lo\grqq{} erfolgt. Innerhalb der <dependencies>-Tag wird dann mit einem weiteren Tag die minimale LibreOffice-Version, für das Beispiel Version 4.2, angegeben.
 
 \begin{lstlisting}
 <dependencies xmlns:lo=
@@ -392,13 +392,13 @@ Es ist möglich, für die Extension eine minimale Version von LibreOffice anzuge
 </dependencies>
 \end{lstlisting}
 
-Die Vorgabe einer auch maximalen Version von LibreOffice, wie dies früher für OpenOffice.org möglich war, steht nicht mehr zur Verfügung. Der Tag für die Angabe der minimalen LibreOffice-Version erfordert neben der Übergabe des Wertes (\glqq value \grqq ) mit der Nummer des Releases (nur zweistellig, nicht ein etwaiges Micro-Release) auch die Vorgabe des Namens als Zeichenkette. Für die Anzeige der Meldung über die minimal erforderliche LibreOffice-Version im Extension Manager wird allerdings nur auf das angegebene Value zurückgegriffen.
+Die Vorgabe einer auch maximalen Version von LibreOffice, wie dies früher für \mbox{OpenOffice.org} möglich war, steht nicht mehr zur Verfügung. Der Tag für die Angabe der minimalen LibreOffice-Version erfordert neben der Übergabe des Wertes (\glqq value\grqq ) mit der Nummer des Releases (nur zweistellig, nicht ein etwaiges Micro-Release) auch die Vorgabe des Namens als Zeichenkette. Für die Anzeige der Meldung über die minimal erforderliche LibreOffice-Version im Extension Manager wird allerdings nur auf das angegebene Value zurückgegriffen.
 
 \paragraph*{Beschreibung der Extension}$~~$\\
 
-Der Extension kann eine Erläuterung Ihrer Funktionsweise über den <extension-description>-Tag hinzugefügt werden, wobei dieser mehrere Lokalisierungen dieser Beschreibung aufzunehmen.
+Der Extension kann eine Erläuterung Ihrer Funktionsweise über den <extension-description>-Tag hinzugefügt werden, wobei dieser mehrere Lokalisierungen der Beschreibung aufzunehmen kann.
 
-Hierzu legen wir zunächst ein weiteres Unterverzeichnis \glqq description \grqq und darin zwei neue -zunächst leere Textdateien \verb|"description_de.txt"| und \verb|"description_en.txt"| an. Diese können später mit Informationen in deutscher und englischer Sprache befüllt werden. Wir binden diese beiden Beschreibungsdateien über folgende Ergänzung des <description>-Tag ein:
+Hierzu legen wir zunächst ein weiteres Unterverzeichnis \glqq description\grqq{} und darin zwei neue zunächst leere Textdateien \verb|"description_de.txt"| und \verb|"description_en.txt"| an. Diese können später mit Informationen in deutscher und englischer Sprache befüllt werden. Wir binden diese beiden Beschreibungsdateien über folgende Ergänzung des <description>-Tag ein:
 \begin{lstlisting}
 <extension-description>
     <src xlink:href="description/description_en.txt" 
@@ -418,17 +418,17 @@ Die Bezeichner für die Lokalisierung richten sich nach \href{https://tools.ietf
 
 \paragraph*{Release Notes}$~~$\\
 
-Es ist zwar möglich, in der Datei description.xml ein Tag für Release-Notes vorzugeben, allerdings hat dies für den Anwender keinen praktischen Nutzen, da ihm die Verbindung zu einer in dem <release-notes>-Tag eingestellten Verbindung zu einer URL im Extension Manager nicht angezeigt wird. Sofern für den Anwender wichtige Informationen zur Funktionsweise der Extension und zu Änderungen des oder der Release angezeigt werden sollten, eignet sich daher allein der zuvor beschriebene <description>-Tag und eine darin verlinkte externe Ressource am besten.
+Es ist zwar möglich, in der Datei description.xml ein Tag für Release-Notes vorzugeben, allerdings hat dies für den Anwender keinen praktischen Nutzen, da ihm die Verbindung zu einer in dem <release-notes>-Tag eingestellten Verlinkung zu einer URL im Extension Manager nicht angezeigt wird. Sofern für den Anwender wichtige Informationen zur Funktionsweise der Extension und zu Änderungen des oder der Release angezeigt werden sollen, eignet sich daher allein der zuvor beschriebene <description>-Tag und eine darin verlinkte externe Ressource am besten.
 
 \paragraph*{Registration / Lizenz}$~~$\\
 
 Das Registration-Element ermöglicht im Moment allein die Vorgabe der Lizenz der Extension, wobei auch hier wieder die Möglichkeit der parallelen Übermittlung von unterschiedlichen Lokalisierungen besteht.
 
-Das <registration>-Element enthält ein <simple-license>-Element, welches wieder für jede Lokalisierung ein <license-text>-Element enthält. Das <simple-license>-Element enthält ein notwendiges Attribut \glqq accept-by \grqq . Optional sind zwei weitere Attribute in diesem Element möglich: \glqq suppress-on-update\grqq~ und \glqq suppress-if-required\grqq .\\
+Das <registration>-Element enthält ein <simple-license>-Element, welches wieder für jede Lokalisierung ein <license-text>-Element beinhaltet. Im <simple-license>-Element steht ein notwendiges Attribut \glqq accept-by \grqq . Optional sind zwei weitere Attribute in diesem Element möglich: \glqq suppress-on-update\grqq~ und \glqq suppress-if-required\grqq .\\
 
 \begin{tabular}{|p{3.5cm}|p{8.3cm}|}
 	\hline \rowcolor{hellgrau} \rule[-3ex]{0pt}{5.5ex}  Attribut & Beschreibung \\
-	\hline \rule[-3ex]{0pt}{5.5ex} accept-by & Erforderlich. Der Wert kann entweder \glqq user\grqq~ oder \glqq admin\grqq~ sein. \glqq user\grqq~ bedeutet, dass jeder Benutzer der Lizenz zuzustimmen hat. Dies heißt dann, dass die Extension nur vom Benutzer und nicht vom Administrator als systemweite (shared) Extension installiert werden kann. Sofern der Wert \glqq admin\grqq~ gesetzt ist, kann die Extension auch als shared (geteilt / systemweit) installiert werden. In diesem Fall muss lediglich die Person, die die Extension installiert, der Lizenz zustimmen. Die einzelnen Benutzer werden nicht gefragt, ob sie die Lizenz akzeptieren. Sie können die Extension einfach benutzen.\\
+	\hline \rule[-3ex]{0pt}{5.5ex} accept-by & Erforderlich. Der Wert kann entweder \glqq user\grqq~ oder \glqq admin\grqq~ sein. \glqq user\grqq~ bedeutet, dass jeder Benutzer der Lizenz zuzustimmen hat. Dies heißt dann, dass die Extension nur vom Benutzer und nicht vom Administrator als systemweite (shared) Extension installiert werden kann. Sofern der Wert \glqq admin\grqq~ gesetzt ist, kann die Extension auch als shared (geteilt / systemweit) installiert werden. In diesem Fall muss lediglich die Person, die die Extension installiert, der Lizenz zustimmen. Die einzelnen Benutzer werden nicht gefragt, ob sie die Lizenz akzeptieren. Sie können die Extension einfach verwenden.\\
 	\hline \rule[-3ex]{0pt}{5.5ex}	suppress-on-update & Optional. Falls das Attribut nicht gesetzt ist, wird als Wert \glqq false\grqq~ angenommen. Sofern das Attribut mit dem Wert \glqq true\grqq~ vorgegeben ist, wird bei einem Update der Extension (gleiche ID, aber eventuell andere Version) der Lizenzdialog nicht erneut angezeigt.\\
 	\hline \rule[-3ex]{0pt}{5.5ex}	suppress-if-required & Optional. Falls das Attribut nicht gesetzt ist, wird als Wert \glqq false\grqq~ angenommen. Der Wert \glqq true\grqq~ weist darauf hin, dass der Lizenzdialog während der Installation nicht angezeigt wird, sofern dies gewünscht wird. Dies kann dann durch den Schalter  \verb|--suppress-license| von unopkg vorgegeben werden und wird implizit für mitgelieferte (gebündelte) Extensions vorausgesetzt.\\
 	\bottomrule
@@ -438,7 +438,7 @@ Das <registration>-Element enthält ein <simple-license>-Element, welches wieder
 \bigskip
 \bigskip
 Legen Sie nun ein weiteres Unterverzeichnis \glqq registration\grqq~ und darin die Textdateien \verb|"license_de.txt"| und \verb|"license_en.txt"| an. Es reicht zunächst, wenn die Dateien existieren, auch wenn sie aktuell noch keinen Inhalt haben. Ihr späterer Inhalt wird, sofern nicht in der Einstellung unterdrückt, dem Benutzer im Installationsdialog angezeigt. In dem Dialog wird dann abgefragt, ob er die Lizenz akzeptiert.
-
+\newpage
 \begin{lstlisting}
 <registration>
     <simple-license accept-by="admin">
