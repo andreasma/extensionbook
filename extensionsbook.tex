@@ -420,6 +420,8 @@ Die Bezeichner für die Lokalisierung richten sich nach \href{https://tools.ietf
 
 Es ist zwar möglich, in der Datei description.xml ein Tag für Release-Notes vorzugeben, allerdings hat dies für den Anwender keinen praktischen Nutzen, da ihm die Verbindung zu einer in dem <release-notes>-Tag eingestellten Verlinkung zu einer URL im Extension Manager nicht angezeigt wird. Sofern für den Anwender wichtige Informationen zur Funktionsweise der Extension und zu Änderungen des oder der Release angezeigt werden sollen, eignet sich daher allein der zuvor beschriebene <description>-Tag und eine darin verlinkte externe Ressource am besten.
 
+
+\newpage
 \paragraph*{Registration / Lizenz}$~~$\\
 
 Das Registration-Element ermöglicht im Moment allein die Vorgabe der Lizenz der Extension, wobei auch hier wieder die Möglichkeit der parallelen Übermittlung von unterschiedlichen Lokalisierungen besteht.
@@ -437,7 +439,7 @@ Das <registration>-Element enthält ein <simple-license>-Element, welches wieder
 
 \bigskip
 \bigskip
-Legen Sie nun ein weiteres Unterverzeichnis \glqq registration\grqq~ und darin die Textdateien \verb|"license_de.txt"| und \verb|"license_en.txt"| an. Es reicht zunächst, wenn die Dateien existieren, auch wenn sie aktuell noch keinen Inhalt haben. Ihr späterer Inhalt wird, sofern nicht in der Einstellung unterdrückt, dem Benutzer im Installationsdialog angezeigt. In dem Dialog wird dann abgefragt, ob er die Lizenz akzeptiert.
+Legen Sie nun ein weiteres Unterverzeichnis \glqq registration\grqq~ und darin die Textdateien \verb|"license_de.txt"| und \verb|"license_en.txt"| an. Es reicht zunächst, wenn die Dateien existieren, auch wenn sie aktuell noch keinen Inhalt haben. Ihr späterer Inhalt wird, sofern nicht in der Einstellung unterdrückt, dem Benutzer im Installationsdialog angezeigt. In dem Dialog wird dann abgefragt, ob die Lizenz akzeptiert wird.
 \newpage
 \begin{lstlisting}
 <registration>
@@ -503,7 +505,7 @@ Eine entsprechende Basisvorlage für eine LibreOffice Extension finden Sie im Gi
 
 \chapter{Auslieferung von Inhalten mit Extensions}
 
-MIt einer LibreOffice Extension lassen sich verschiedene Arten von Inhalten dem Standard-Programm hinzufügen. So ist es beispielsweise möglich, der Gallery, einem Verwaltungsmodul für Grafiken, Zeichnungen, Musik und andere Multimediadateien, neue Bereiche und Dateien hinzuzufügen. Wie Sie eine solche Extension erstellen, soll im folgenden Abschnitt erläutert werden.
+Mit einer LibreOffice Extension lassen sich verschiedene Arten von Inhalten zu dem Standard-Programm ergänzen. So ist es beispielsweise möglich, der Gallery, einem Verwaltungsmodul für Grafiken, Zeichnungen, Musik und andere Multimediadateien, neue Bereiche und Dateien hinzuzufügen. Wie Sie eine solche Extension erstellen, soll im folgenden Abschnitt erläutert werden.
 
 \section{Gallery-Extension}
 
