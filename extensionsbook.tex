@@ -839,7 +839,7 @@ Nach den allgemeinen Definitionen werden in den Zeilen beginnend mit \glqq node\
 
 Nun fehlt noch die Autokorrektur-Datei, die mit der Extension verteilt werden soll. Dazu erstellt man ein neues Unterverzeichnis \verb|autocorr|. In dieses wird sodann die Datei \verb|arcor_de-DE.dat| abgelegt.
 
-Die Extension kann nun mit dem Build-Skript, das oben im Abschnitt \glqq Erstellen der Extension-Datei\grqq~ beschrieben und erstellt wurde. Diese Datei \verb|build| mit dem enthaltenen Python-Skript muss sich ebenfalls im in diesem Abschnitt angelegten Verzeichnis \glqq testpcsteno\grqq~ befinden. Sein Aufruf ist ebenfalls oben beschrieben.
+Die Extension kann nun mit dem Build-Skript, das oben im Abschnitt \glqq Erstellen der Extension-Datei\grqq~ beschrieben und erstellt wurde, gebaut werden. Diese Datei \verb|build| mit dem enthaltenen Python-Skript muss sich ebenfalls im in diesem Abschnitt angelegten Verzeichnis \glqq testpcsteno\grqq~ befinden. Sein Aufruf ist ebenfalls oben beschrieben.
 
 \begin{center}
 	\captionsetup{type=figure}
@@ -860,7 +860,7 @@ durch
 <node oor:name="%origin%/autocorr/$(vlang)" oor:op="fuse"/>
 \end{lstlisting}
 
-zu ersetzen. In dem Unterverzeichnis ist für die auszuliefernden Lokalisierungen ein Unterverzeichnis anzulegen und die Autokorrektur-Datei dort abzulegen. Als Beispiel für die Lokalisierung Deutsch ist somit ein Unterverzeichnis \glqq de\grqq~ anzulegen und darin die Autokorrektur-Datei für diese Lokalisierung abzulegen.
+zu ersetzen. In dem Unterverzeichnis ist für die auszuliefernden Lokalisierungen ein Unterverzeichnis anzulegen und die jeweilige  Autokorrektur-Datei dort abzulegen. Als Beispiel für die Lokalisierung Deutsch ist somit ein Unterverzeichnis \glqq de\grqq~ anzulegen und darin die Autokorrektur-Datei für diese Lokalisierung abzulegen.
 
 Mit der Installation der Autokorrektur-Extension wird allerdings für LibreOffice eine zuvor vom Benutzer erstellte eigene Autokorrektur-Liste(/-Datei) nicht mehr sichtbar. Sie bleibt zwar im Unterordner \glqq autocorr\grqq~ erhalten, die dort enthaltenen Korrekturen sind allerdings für den Benutzer nicht mehr verfügbar. Sie gehen jedoch nicht komplett verloren, sondern sind nach der Deinstallation der Autokorrektur-Extension für den Benutzer wieder verfügbar. Die mit der Extension übermittelte Autokorrektur-Datei genießt somit Priorität vor der Datei im Unterverzeichnis \glqq autocorr\grqq.
 
@@ -881,7 +881,7 @@ Der Extension fehlt nun noch eine Beschreibung, die sowohl eine Erläuterung des
 </extension-descritption>
 \end{lstlisting}
 
-Nun muss noch ein Unterverzeichnis \glqq description\grqq~ erstellt und dort eine neue Textdatei \verb|description_de.txt| angelegt werden. Diese Datei kann einen längeren Beschreibungstext enthalten, es ist allerdings nicht sinnvoll, dort eine vollständige Dokumentation unterzubringen, da das Rendern im Extension-Manager bei längeren Texten nicht optimal ist. Es sollten daher nur einige grundsätzliche Erläuterungen und Hinweise aufgenommen werden und im Übrigen auf eine Datei mit der vollständigen Dokumentation verwiesen werden, die beispielsweise auf der LibreOffice Extensions-Website \verb|http://extensions.libreoffice.org/extensions| vom Autor der Extension zum Download (im Dateiformat ODT oder PDF) bereit gestellt werden kann.
+Nun muss noch ein Unterverzeichnis \glqq description\grqq~ erstellt und dort eine neue Textdatei \verb|description_de.txt| angelegt werden. Diese Datei kann einen längeren Beschreibungstext enthalten. Es ist allerdings nicht sinnvoll, dort eine vollständige Dokumentation unterzubringen, da das Rendern im Extension-Manager bei längeren Texten nicht optimal ist. Es sollten daher nur einige grundsätzliche Erläuterungen und Hinweise aufgenommen werden und im Übrigen auf eine Datei mit der vollständigen Dokumentation verwiesen werden, die beispielsweise auf der LibreOffice Extensions-Website \verb|http://extensions.libreoffice.org| vom Autor der Extension zum Download (im Dateiformat ODT oder PDF) bereit gestellt werden kann.
 
 Bevor die Extension auf der LibreOffice Extensions-Website veröffentlicht werden kann, ist die Datei \verb|description.xml| noch um den Verweis auf die Lizenz zu ergänzen, unter der die Extension veröffentlicht wird und die vom Anwender bei der Installation akzeptiert werden muss. Hierzu wird zunächst ein weiteres Unterverzeichnis \glqq registration\grqq~ angelegt, in dem, gegebenenfalls in unterschiedlichen Lokalisierungen Dateien mit den Lizenztexten abgelegt werden, z.B. für die deutsche Lokalisierung \verb|license_de.txt|. 
 
@@ -932,14 +932,14 @@ Zunächst erstellen Sie im Grundverzeichnis der Farbpaletten-Extension ein neues
 </ooo:color-table>
 \end{lstlisting}
 
-Innerhalb des XML-Tag <ooo:color-table> legen Sie danach die einzelnen Farben nach folgendem Muster and:
+Innerhalb des XML-Tag <ooo:color-table> legen Sie danach die einzelnen Farben nach folgendem Muster an:
 
 \begin{lstlisting}
 <draw:color draw:name="Farbname" 
     draw:color="#Farbkodierung in Hexadezimal" />
 \end{lstlisting}
 
-Anstelle von Farbname tragen Sie dabei den individuellen Namen ihre benutzerdefinierten Farbe ein. Hinter \glqq draw color\grqq~ folgt nach dem \glqq \#\grqq~die Farbe in hexadezimaler Kodierung. Sofern Sie nur die Werte ihrer Farben nur im System RGB vorliegen haben, können Sie den Dialog \glqq Fläche\grqq~zum Umrechnen in das Hexadezimal-System verwenden. Geben Sie dazu auf der rechten Seite einfach die RGB-Werte ein und lesen Sie den Wert im Feld \glqq Hex\grqq~ab.
+Anstelle von Farbname tragen Sie dabei den individuellen Namen ihre benutzerdefinierten Farbe ein. Hinter \glqq draw color\grqq~ folgt nach dem \glqq \#\grqq~die Farbe in hexadezimaler Kodierung. Sofern Sie die Werte ihrer Farben nur im System RGB vorliegen haben, können Sie den Dialog \glqq Fläche\grqq~zum Umrechnen in das Hexadezimal-System verwenden. Geben Sie dazu auf der rechten Seite einfach die RGB-Werte ein und lesen Sie den Wert im Feld \glqq Hex\grqq~ab.
 
 Wenn Sie die Datei mit der Farbpalette fertig gestellt haben, müssen Sie noch die Datei \glqq paths.xcu\grqq~im Grundverzeichnis neu anlegen oder ändern mit folgendem Inhalt:
 
@@ -984,7 +984,7 @@ kann.
 
 In einem weiteren Unterverzeichnis, das Sie mit \glqq description\grqq benennen können, erstellen Sie eine Textdatei im Dateiformat *.txt. In diese fügen Sie die Beschreibung Ihrer Icon-Set-Extension ein, die später im Extension-Manager-Dialog angezeigt wird. Sie sollte nicht zu lang sein, da sie ansonsten im Dialogfenster für den Benutzer unschön dargestellt wird.
 
-Ein weiteres Unterverzeichnis mit dem Namen \glqq META-INF\grqq legen Sie an, um dort die Datei \glqq manifest.xml\grqq anzulegen. Diese Datei erhält folgenden Inhalt:
+Ein weiteres Unterverzeichnis erstellen Sie mit dem Namen \glqq META-INF\grqq, um dort die Datei \glqq manifest.xml\grqq anzulegen. Diese Datei erhält folgenden Inhalt:
 
 \begin{lstlisting}
 <?xml version="1.0" encoding="UTF-8"?>
